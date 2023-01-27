@@ -1,11 +1,17 @@
 {
   "name": "vscode-simple-changelog",
+  "publisher": "tobiaswaelde",
   "displayName": "Simple Changelog",
   "description": "Simple tool to create changelogs",
   "version": "0.0.1",
   "license": "MIT",
   "repository": {
     "url": "https://github.com/tobiaswaelde/vscode-simple-changelog"
+  },
+  "author": {
+    "name": "Tobias Wälde",
+    "email": "tobias.waelde@gmail.com",
+    "url": "https://tobiaswaelde.com"
   },
   "engines": {
     "vscode": "^1.74.0"
