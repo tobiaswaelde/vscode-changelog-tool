@@ -5,6 +5,12 @@
   "description": "Simple tool to create changelogs",
   "version": "0.0.1",
   "license": "MIT",
+  "pricing": "Free",
+  "icon": "assets/icon/icon-x512.png",
+  "galleryBanner": {
+    "color": "#ffffff",
+    "theme": "light"
+  },
   "repository": {
     "url": "https://github.com/tobiaswaelde/vscode-simple-changelog"
   },
