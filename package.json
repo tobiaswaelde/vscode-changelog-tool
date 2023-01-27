@@ -4,6 +4,9 @@
   "description": "Simple tool to create changelogs",
   "version": "0.0.1",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/tobiaswaelde/vscode-simple-changelog"
+  },
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -11,7 +14,8 @@
     "Other"
   ],
   "activationEvents": [
-    "*"
+    "workspaceContains:**/CHANGELOG.md",
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
