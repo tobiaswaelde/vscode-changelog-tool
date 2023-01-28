@@ -34,7 +34,7 @@
     "viewsWelcome": [
       {
         "view": "changelog-explorer",
-        "contents": "No changelog found.\n[Create initial changelog](command:simple-changelog.initialize)",
+        "contents": "No changelogs found.\n[Create initial changelog](command:simple-changelog.initialize)",
         "when": "!simple-changelog.initialized"
       }
     ],
