@@ -21,6 +21,7 @@ export async function initialize() {
 		// set extension to 'initialized'
 		vscode.commands.executeCommand('setContext', 'simple-changelog.initialized', true);
 
+		// refresh to show new changelog in tree view
 		vscode.commands.executeCommand('simple-changelog.refresh');
 	}
 }
