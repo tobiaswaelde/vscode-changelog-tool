@@ -37,7 +37,9 @@ export class Changelog {
 
 			if (lineType === 'version') {
 				const v = this.getVersion(line);
-				if (v) c.versions.push(v);
+				if (v) {
+					c.versions.push(v);
+				}
 			} else if (lineType === 'type') {
 				itemType = this.getItemType(line);
 			} else if (lineType === 'item') {
@@ -65,15 +67,6 @@ export class Changelog {
 			}
 		}
 
-		// for (const v of c.versions) {
-		// 	if (v.additions!.length === 0) delete v.additions;
-		// 	if (v.changes!.length === 0) delete v.changes;
-		// 	if (v.deprecations!.length === 0) delete v.deprecations;
-		// 	if (v.fixes!.length === 0) delete v.fixes;
-		// 	if (v.removals!.length === 0) delete v.removals;
-		// 	if (v.securityChanges!.length === 0) delete v.securityChanges;
-		// }
-
 		return c;
 	}
 	public toString() {
@@ -83,9 +76,15 @@ export class Changelog {
 	}
 
 	private static getLineType(line: string): LineType {
-		if (line.startsWith('## ')) return 'version';
-		if (line.startsWith('**') && line.endsWith('**')) return 'type';
-		if (line.startsWith('- ')) return 'item';
+		if (line.startsWith('## ')) {
+			return 'version';
+		}
+		if ((line.startsWith('**') && line.endsWith('**')) || line.startsWith('### ')) {
+			return 'type';
+		}
+		if (line.startsWith('- ')) {
+			return 'item';
+		}
 		return 'none';
 	}
 	private static getVersion(line: string): Version | undefined {
@@ -104,7 +103,7 @@ export class Changelog {
 		}
 	}
 	private static getItemType(line: string): ItemType {
-		const t = line.replace(/\*\*/g, '').trim();
+		const t = line.replace(/\*\*/g, '').replace(/\#{3}/g, '').trim();
 
 		if (t === 'Added') return 'addition';
 		if (t === 'Changed') return 'change';
