@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import * as vscode from 'vscode';
 
 /**
  * recursively find files which match the filter
@@ -44,4 +45,10 @@ export const findFiles = (rootPath: string, filter?: RegExp, exclude?: RegExp): 
 export function getLastDirName(filepath: string) {
 	const dirname = path.dirname(filepath);
 	return path.basename(dirname);
+}
+
+export function getWorkspacePaths(): string[] | undefined {
+	return vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0
+		? vscode.workspace.workspaceFolders.map((x) => x.uri.fsPath)
+		: undefined;
 }
