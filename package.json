@@ -27,15 +27,22 @@
   ],
   "activationEvents": [
     "workspaceContains:**/CHANGELOG.md",
-    "onStartupFinished"
+    "onView:changelog-explorer"
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsWelcome": [
+      {
+        "view": "changelog-explorer",
+        "contents": "No changelog found.\n[Create initial changelog](command:simple-changelog.initialize)",
+        "when": "!simple-changelog.initialized"
+      }
+    ],
     "viewsContainers": {
       "activitybar": [
         {
           "id": "changelog-explorer",
-          "title": "Changelog",
+          "title": "Changelogs",
           "icon": "$(timeline-view-icon)"
         }
       ]
@@ -43,8 +50,32 @@
     "views": {
       "changelog-explorer": [
         {
-          "id": "changelog",
-          "name": "Changelog"
+          "id": "changelog-explorer",
+          "name": "Changelogs",
+          "icon": "$(timeline-view-icon)"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "simple-changelog.initialize",
+        "category": "Simple Changelog",
+        "title": "Create initial changelog"
+      },
+      {
+        "command": "simple-changelog.refresh",
+        "category": "Simple Changelog",
+        "title": "Refresh changelogs",
+        "icon": "$(refresh)",
+        "shortTitle": "Refresh"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "simple-changelog.refresh",
+          "when": "view == changelog-explorer && simple-changelog.initialized",
+          "group": "navigation"
         }
       ]
     }

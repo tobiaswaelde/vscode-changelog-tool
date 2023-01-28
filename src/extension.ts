@@ -1,33 +1,48 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as path from 'path';
-import * as fs from 'fs';
 import * as vscode from 'vscode';
-import { ChangelogProvider } from './treeview/provider';
-import { Changelog } from './types/changelog';
+import { registerCommands, registerUnititializedCommands } from './commands';
+import { registerChangelogCommands } from './treeview/changelog/commands';
+import { ChangelogProvider } from './treeview/changelog/provider';
+import { findFiles } from './util/fs';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	const rootPath =
+	console.log('[Simple Changelog] Extension is now active.');
+
+	// find workspace paths
+	const workspaces =
 		vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0
-			? vscode.workspace.workspaceFolders[0].uri.fsPath
+			? vscode.workspace.workspaceFolders.map((x) => x.uri.fsPath)
 			: undefined;
-
-	if (rootPath) {
-		const changelogFile = path.join(rootPath, 'changelog.md');
-		const content = fs.readFileSync(changelogFile).toString();
-
-		const changelog = Changelog.parse(content);
-
-		const provider = new ChangelogProvider(changelog);
-		// vscode.window.registerTreeDataProvider('changelog', provider);
-
-		vscode.window.createTreeView('changelog', {
-			treeDataProvider: provider,
-		});
+	if (!workspaces) {
+		return;
 	}
+
+	// find all paths where a changelog.md is present
+	const changelogPaths: string[] = workspaces.reduce(
+		(acc: string[], workspace) =>
+			acc.concat(...findFiles(workspace, /changelog.md/i, /node_modules/)),
+		[]
+	);
+
+	registerUnititializedCommands(context);
+
+	// show welcome view is no changelogs found
+	if (changelogPaths.length === 0) {
+		vscode.commands.executeCommand('setContext', 'simple-changelog.initialized', false);
+		return;
+	}
+
+	// set extension to 'initialized'
+	vscode.commands.executeCommand('setContext', 'simple-changelog.initialized', true);
+
+	// treeview
+	const provider = new ChangelogProvider(changelogPaths);
+	vscode.window.createTreeView('changelog-explorer', {
+		treeDataProvider: provider,
+		showCollapseAll: true,
+	});
+
+	registerCommands(context);
+	registerChangelogCommands(context);
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}
