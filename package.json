@@ -25,6 +25,12 @@
   "categories": [
     "Other"
   ],
+  "keywords": [
+    "vscode",
+    "vscode-extension",
+    "changelog",
+    "tool"
+  ],
   "activationEvents": [
     "onView:changelog-explorer"
   ],
