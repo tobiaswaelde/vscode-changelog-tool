@@ -7,6 +7,11 @@ import { ChangelogTypeTreeItem } from './items/type-tree-item';
 import { ChangelogVersionTreeItem } from './items/version-tree-item';
 import { findFiles, getWorkspacePaths } from '../../util/fs';
 import { setContext } from '../../util/context';
+import { editItem } from './commands/edit-item';
+import { addVersion } from './commands/add-version';
+import { openChangelogFile } from './commands/open-changelog-file';
+import { addItem } from './commands/add-item';
+import { deleteItem } from './commands/delete-item';
 
 type ChangelogTreeItem =
 	| ChangelogFolderTreeItem
@@ -74,14 +79,14 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 
 	private registerCommands(context: vscode.ExtensionContext) {
 		context.subscriptions.push(
-			vscode.commands.registerCommand('simple-changelog.changelogs.addVersion', this.addVersion),
+			vscode.commands.registerCommand('simple-changelog.changelogs.addVersion', addVersion),
 			vscode.commands.registerCommand(
 				'simple-changelog.changelogs.openChangelogFile',
-				this.openChangelogFile
+				openChangelogFile
 			),
-			vscode.commands.registerCommand('simple-changelog.changelogs.addItem', this.addItem),
-			vscode.commands.registerCommand('simple-changelog.changelogs.editItem', this.editItem),
-			vscode.commands.registerCommand('simple-changelog.changelogs.deleteItem', this.deleteItem)
+			vscode.commands.registerCommand('simple-changelog.changelogs.addItem', addItem),
+			vscode.commands.registerCommand('simple-changelog.changelogs.editItem', editItem),
+			vscode.commands.registerCommand('simple-changelog.changelogs.deleteItem', deleteItem)
 		);
 	}
 
@@ -116,62 +121,5 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 
 		this.filepaths = changelogPaths;
 		this._onDidChangeTreeData.fire();
-	}
-
-	private async addVersion(item: ChangelogFolderTreeItem) {
-		//TODO
-		// ask for new version string
-		// check if version already exists
-		// get current date
-		// add version to changelog
-	}
-
-	private async openChangelogFile(item: ChangelogFolderTreeItem) {
-		//TODO
-	}
-
-	private async addItem(item: ChangelogTypeTreeItem) {
-		//TODO
-	}
-
-	private async editItem(item: ChangelogItemTreeItem) {
-		console.log('edit', item);
-
-		const res = await vscode.window.showInputBox({
-			prompt: 'Edit item content',
-			title: 'Edit item',
-			value: item.label?.toString(),
-		});
-		if (res) {
-			const changelog = item.changelog;
-			const vx = changelog.versions.findIndex((x) => x.label === item.version.label);
-			if (vx === -1) {
-				return;
-			}
-
-			const ix = changelog.versions[vx].items.findIndex(
-				(x) => x.type === item.item.type && x.text === item.item.text
-			);
-
-			item.item.text = res;
-			changelog.versions[vx].items[ix] = {
-				type: changelog.versions[vx].items[ix].type,
-				text: res,
-			};
-
-			const success = changelog.writeToFile();
-			if (success) {
-				vscode.commands.executeCommand('simple-changelog.changelogs.refresh');
-			}
-		}
-	}
-
-	private async deleteItem(item: ChangelogItemTreeItem) {
-		//TODO
-	}
-
-	private async writeToFile(changelog: Changelog) {
-		//TODO
-		changelog.writeToFile();
 	}
 }
