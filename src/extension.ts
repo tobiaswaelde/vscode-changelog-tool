@@ -1,9 +1,12 @@
 import * as vscode from 'vscode';
 import { registerCommands } from './commands';
 import { ChangelogProvider } from './treeview/changelog/provider';
+import { setContextObject } from './util/context';
 
 export function activate(context: vscode.ExtensionContext) {
 	console.log('[Simple Changelog] Extension is now active.');
+
+	setContextObject(context);
 
 	// treeview
 	const provider = new ChangelogProvider(context);
@@ -11,7 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
 		treeDataProvider: provider,
 		showCollapseAll: true,
 	});
-	provider.refresh();
+	// provider.refresh();
 
 	registerCommands(context);
 }

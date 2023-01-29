@@ -26,7 +26,6 @@
     "Other"
   ],
   "activationEvents": [
-    "workspaceContains:**/CHANGELOG.md",
     "onView:changelog-explorer"
   ],
   "main": "./out/extension.js",
@@ -63,19 +62,75 @@
         "title": "Create initial changelog"
       },
       {
-        "command": "simple-changelog.refresh",
+        "command": "simple-changelog.changelogs.refresh",
         "category": "Simple Changelog",
-        "title": "Refresh changelogs",
-        "icon": "$(refresh)",
-        "shortTitle": "Refresh"
+        "title": "Refresh Changelogs",
+        "shortTitle": "Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "simple-changelog.changelogs.addVersion",
+        "category": "Simple Changelog",
+        "title": "Add Version to Changelog",
+        "shortTitle": "Add Version",
+        "icon": "$(add)"
+      },
+      {
+        "command": "simple-changelog.changelogs.openChangelogFile",
+        "category": "Simple Changelog",
+        "title": "Open referencing changelog file",
+        "shortTitle": "Open file",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "simple-changelog.changelogs.addItem",
+        "category": "Simple Changelog",
+        "title": "Add Item",
+        "icon": "$(add)"
+      },
+      {
+        "command": "simple-changelog.changelogs.deleteItem",
+        "category": "Simple Changelog",
+        "title": "Delete Item"
+      },
+      {
+        "command": "simple-changelog.changelogs.editItem",
+        "category": "Simple Changelog",
+        "title": "Edit",
+        "icon": "$(edit)"
       }
     ],
     "menus": {
       "view/title": [
         {
-          "command": "simple-changelog.refresh",
+          "command": "simple-changelog.changelogs.refresh",
           "when": "view == changelog-explorer && simple-changelog.initialized",
           "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "simple-changelog.changelogs.addVersion",
+          "when": "view == changelog-explorer && viewItem == changelog-folder",
+          "group": "inline"
+        },
+        {
+          "command": "simple-changelog.changelogs.openChangelogFile",
+          "when": "view == changelog-explorer && viewItem == changelog-folder"
+        },
+        {
+          "command": "simple-changelog.changelogs.addItem",
+          "when": "view == changelog-explorer && viewItem == changelog-type",
+          "group": "inline"
+        },
+        {
+          "command": "simple-changelog.changelogs.deleteItem",
+          "when": "view == changelog-explorer && viewItem == changelog-item"
+        },
+        {
+          "command": "simple-changelog.changelogs.editItem",
+          "when": "view == changelog-explorer && viewItem == changelog-item",
+          "group": "inline"
         }
       ]
     }
@@ -89,16 +144,20 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.74.0",
     "@types/glob": "^8.0.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
+    "@types/uuid": "^9.0.0",
+    "@types/vscode": "^1.74.0",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
+    "@vscode/test-electron": "^2.2.0",
     "eslint": "^8.28.0",
     "glob": "^8.0.3",
     "mocha": "^10.1.0",
-    "typescript": "^4.9.3",
-    "@vscode/test-electron": "^2.2.0"
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
   }
 }

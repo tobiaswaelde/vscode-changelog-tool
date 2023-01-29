@@ -1,11 +1,13 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import { Changelog } from '../../types/changelog';
+import { Changelog } from '../../classes/changelog';
 import { ChangelogFolderTreeItem } from './items/folder-tree-item';
 import { ChangelogItemTreeItem } from './items/item-tree-item';
 import { ChangelogTypeTreeItem } from './items/type-tree-item';
 import { ChangelogVersionTreeItem } from './items/version-tree-item';
 import { findFiles, getWorkspacePaths } from '../../util/fs';
+import { setContext } from '../../util/context';
+import { deleteItem } from './commands/delete-item';
 
 type ChangelogTreeItem =
 	| ChangelogFolderTreeItem
@@ -23,9 +25,57 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 
 	constructor(context: vscode.ExtensionContext) {
 		this.refresh();
+		this.registerCommands(context);
+	}
 
+	getTreeItem(element: ChangelogTreeItem): vscode.TreeItem | Thenable<vscode.TreeItem> {
+		return element;
+	}
+
+	getChildren(element?: ChangelogTreeItem | undefined): vscode.ProviderResult<ChangelogTreeItem[]> {
+		if (element === undefined) {
+			if (this.filepaths.length === 1) {
+				const changelog = new Changelog(this.filepaths[0]);
+				return changelog.versions.map((v) => new ChangelogVersionTreeItem(changelog, v));
+			}
+
+			return this.filepaths.map((filepath) => new ChangelogFolderTreeItem(new Changelog(filepath)));
+		}
+
+		if (element instanceof ChangelogFolderTreeItem) {
+			const { changelog } = element;
+			return changelog.versions.map((v) => new ChangelogVersionTreeItem(changelog, v));
+		}
+
+		if (element instanceof ChangelogVersionTreeItem) {
+			const { changelog, version } = element;
+			return [
+				new ChangelogTypeTreeItem(changelog, version, 'addition', version.additions),
+				new ChangelogTypeTreeItem(changelog, version, 'change', version.changes),
+				new ChangelogTypeTreeItem(changelog, version, 'deprecation', version.deprecations),
+				new ChangelogTypeTreeItem(changelog, version, 'fix', version.fixes),
+				new ChangelogTypeTreeItem(changelog, version, 'removal', version.removals),
+				new ChangelogTypeTreeItem(changelog, version, 'securityChange', version.securityChanges),
+			];
+		}
+
+		if (element instanceof ChangelogTypeTreeItem) {
+			const { changelog, version, type } = element;
+			return element.items.map((item) => new ChangelogItemTreeItem(changelog, version, type, item));
+		}
+	}
+
+	private registerCommands(context: vscode.ExtensionContext) {
 		context.subscriptions.push(
-			vscode.commands.registerCommand('simple-changelog.refresh', () => this.refresh())
+			vscode.commands.registerCommand('simple-changelog.changelogs.refresh', this.refresh),
+			vscode.commands.registerCommand('simple-changelog.changelogs.addVersion', this.addVersion),
+			vscode.commands.registerCommand(
+				'simple-changelog.changelogs.openChangelogFile',
+				this.openChangelogFile
+			),
+			vscode.commands.registerCommand('simple-changelog.changelogs.addItem', this.addItem),
+			vscode.commands.registerCommand('simple-changelog.changelogs.editItem', this.editItem),
+			vscode.commands.registerCommand('simple-changelog.changelogs.deleteItem', this.deleteItem)
 		);
 	}
 
@@ -36,7 +86,7 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 		if (!workspaces) {
 			this.filepaths = [];
 			this._onDidChangeTreeData.fire();
-			vscode.commands.executeCommand('setContext', 'simple-changelog.initialized', false);
+			setContext('initialized', false);
 			return;
 		}
 
@@ -51,53 +101,58 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 		if (changelogPaths.length === 1) {
 			this.filepaths = [];
 			this._onDidChangeTreeData.fire();
-			vscode.commands.executeCommand('setContext', 'simple-changelog.initialized', false);
+			setContext('initialized', false);
 			return;
 		}
 
 		// set extension to 'initialized'
-		vscode.commands.executeCommand('setContext', 'simple-changelog.initialized', true);
+		setContext('initialized', true);
 
 		this.filepaths = changelogPaths;
 		this._onDidChangeTreeData.fire();
 	}
 
-	getTreeItem(element: ChangelogTreeItem): vscode.TreeItem | Thenable<vscode.TreeItem> {
-		return element;
+	private async addVersion(item: ChangelogFolderTreeItem) {
+		//TODO
+		// ask for new version string
+		// check if version already exists
+		// get current date
+		// add version to changelog
 	}
 
-	getChildren(element?: ChangelogTreeItem | undefined): vscode.ProviderResult<ChangelogTreeItem[]> {
-		if (element === undefined) {
-			if (this.filepaths.length === 1) {
-				const filepath = this.filepaths[0];
-				const content = fs.readFileSync(filepath).toString();
-				const changelog = Changelog.parse(content);
+	private async openChangelogFile(item: ChangelogFolderTreeItem) {
+		//TODO
+	}
 
-				return changelog.versions.map((v) => new ChangelogVersionTreeItem(v));
+	private async addItem(item: ChangelogTypeTreeItem) {
+		//TODO
+	}
+
+	private async editItem(item: ChangelogItemTreeItem) {
+		console.log('edit', item);
+
+		const res = await vscode.window.showInputBox({
+			prompt: 'Edit item content',
+			title: 'Edit item',
+			value: item.label?.toString(),
+		});
+		if (res) {
+			const c = item.changelog;
+			const vx = c.versions.findIndex((x) => x.label === item.version.label);
+			if (item.type === 'change') {
+				const ix = c.versions[vx].changes.findIndex((x) => x === item.label);
+				c.versions[vx].additions[ix] = res;
 			}
-			return this.filepaths.map((filepath) => new ChangelogFolderTreeItem(filepath));
+			c.writeToFile();
 		}
+	}
 
-		if (element instanceof ChangelogFolderTreeItem) {
-			const content = fs.readFileSync(element.filepath).toString();
-			const changelog = Changelog.parse(content);
+	private async deleteItem(item: ChangelogItemTreeItem) {
+		//TODO
+	}
 
-			return changelog.versions.map((v) => new ChangelogVersionTreeItem(v));
-		}
-
-		if (element instanceof ChangelogVersionTreeItem) {
-			return [
-				new ChangelogTypeTreeItem('addition', element.version.additions),
-				new ChangelogTypeTreeItem('change', element.version.changes),
-				new ChangelogTypeTreeItem('deprecation', element.version.deprecations),
-				new ChangelogTypeTreeItem('fix', element.version.fixes),
-				new ChangelogTypeTreeItem('removal', element.version.removals),
-				new ChangelogTypeTreeItem('securityChange', element.version.securityChanges),
-			];
-		}
-
-		if (element instanceof ChangelogTypeTreeItem) {
-			return element.items.map((item) => new ChangelogItemTreeItem(element.type, item));
-		}
+	private async writeToFile(changelog: Changelog) {
+		//TODO
+		changelog.writeToFile();
 	}
 }

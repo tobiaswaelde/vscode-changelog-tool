@@ -1,7 +1,8 @@
-import { Changelog } from './../types/changelog';
+import { Changelog } from '../classes/changelog';
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
+import { setContext } from '../util/context';
 
 /**
  * Create initial changelog
@@ -10,16 +11,15 @@ export async function initialize() {
 	if (vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0) {
 		const workspace = vscode.workspace.workspaceFolders[0].uri.fsPath;
 
-		const changelog = new Changelog();
-
 		// create file `CHANGELOG.md`
 		const filename = path.join(workspace, 'CHANGELOG.md');
 		if (!fs.existsSync(filename)) {
+			const changelog = new Changelog(filename);
 			fs.writeFileSync(filename, changelog.toString());
 		}
 
 		// set extension to 'initialized'
-		vscode.commands.executeCommand('setContext', 'simple-changelog.initialized', true);
+		setContext('initialized', true);
 
 		// refresh to show new changelog in tree view
 		vscode.commands.executeCommand('simple-changelog.refresh');
