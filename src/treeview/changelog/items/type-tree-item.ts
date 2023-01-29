@@ -1,6 +1,7 @@
+import { ChangelogItem } from './../../../types/changelog';
 import * as vscode from 'vscode';
 import { Changelog } from '../../../classes/changelog';
-import { ItemType, Version } from '../../../types/changelog';
+import { ItemType, ChangelogVersion } from '../../../types/changelog';
 import { getIconFromItemType, getTextFromItemType } from '../../util';
 
 export class ChangelogTypeTreeItem extends vscode.TreeItem {
@@ -8,9 +9,9 @@ export class ChangelogTypeTreeItem extends vscode.TreeItem {
 
 	constructor(
 		public changelog: Changelog,
-		public version: Version,
+		public version: ChangelogVersion,
 		public type: ItemType,
-		public items: string[]
+		public items: ChangelogItem[]
 	) {
 		super(getTextFromItemType(type), vscode.TreeItemCollapsibleState.Collapsed);
 		if (items.length > 0) {

@@ -7,7 +7,6 @@ import { ChangelogTypeTreeItem } from './items/type-tree-item';
 import { ChangelogVersionTreeItem } from './items/version-tree-item';
 import { findFiles, getWorkspacePaths } from '../../util/fs';
 import { setContext } from '../../util/context';
-import { deleteItem } from './commands/delete-item';
 
 type ChangelogTreeItem =
 	| ChangelogFolderTreeItem
@@ -50,12 +49,42 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 		if (element instanceof ChangelogVersionTreeItem) {
 			const { changelog, version } = element;
 			return [
-				new ChangelogTypeTreeItem(changelog, version, 'addition', version.additions),
-				new ChangelogTypeTreeItem(changelog, version, 'change', version.changes),
-				new ChangelogTypeTreeItem(changelog, version, 'deprecation', version.deprecations),
-				new ChangelogTypeTreeItem(changelog, version, 'fix', version.fixes),
-				new ChangelogTypeTreeItem(changelog, version, 'removal', version.removals),
-				new ChangelogTypeTreeItem(changelog, version, 'securityChange', version.securityChanges),
+				new ChangelogTypeTreeItem(
+					changelog,
+					version,
+					'addition',
+					version.items.filter((x) => x.type === 'addition')
+				),
+				new ChangelogTypeTreeItem(
+					changelog,
+					version,
+					'change',
+					version.items.filter((x) => x.type === 'change')
+				),
+				new ChangelogTypeTreeItem(
+					changelog,
+					version,
+					'deprecation',
+					version.items.filter((x) => x.type === 'deprecation')
+				),
+				new ChangelogTypeTreeItem(
+					changelog,
+					version,
+					'fix',
+					version.items.filter((x) => x.type === 'fix')
+				),
+				new ChangelogTypeTreeItem(
+					changelog,
+					version,
+					'removal',
+					version.items.filter((x) => x.type === 'removal')
+				),
+				new ChangelogTypeTreeItem(
+					changelog,
+					version,
+					'securityChange',
+					version.items.filter((x) => x.type === 'securityChange')
+				),
 			];
 		}
 
@@ -137,13 +166,23 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 			value: item.label?.toString(),
 		});
 		if (res) {
-			const c = item.changelog;
-			const vx = c.versions.findIndex((x) => x.label === item.version.label);
-			if (item.type === 'change') {
-				const ix = c.versions[vx].changes.findIndex((x) => x === item.label);
-				c.versions[vx].additions[ix] = res;
+			const changelog = item.changelog;
+			const vx = changelog.versions.findIndex((x) => x.label === item.version.label);
+			if (vx === -1) {
+				return;
 			}
-			c.writeToFile();
+
+			const ix = changelog.versions[vx].items.findIndex(
+				(x) => x.type === item.item.type && x.text === item.item.text
+			);
+
+			item.item.text = res;
+			changelog.versions[vx].items[ix] = {
+				type: changelog.versions[vx].items[ix].type,
+				text: res,
+			};
+
+			changelog.writeToFile();
 		}
 	}
 

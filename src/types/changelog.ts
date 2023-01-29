@@ -9,14 +9,13 @@ export type ItemType =
 	| 'securityChange'
 	| 'none';
 
-export type Version = {
+export type ChangelogItem = {
+	type: ItemType;
+	text: string;
+};
+
+export type ChangelogVersion = {
 	label: string;
 	date: string;
-
-	additions: string[];
-	changes: string[];
-	deprecations: string[];
-	fixes: string[];
-	removals: string[];
-	securityChanges: string[];
+	items: ChangelogItem[];
 };
