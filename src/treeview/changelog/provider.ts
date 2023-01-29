@@ -96,7 +96,6 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 
 	private registerCommands(context: vscode.ExtensionContext) {
 		context.subscriptions.push(
-			vscode.commands.registerCommand('simple-changelog.changelogs.refresh', this.refresh),
 			vscode.commands.registerCommand('simple-changelog.changelogs.addVersion', this.addVersion),
 			vscode.commands.registerCommand(
 				'simple-changelog.changelogs.openChangelogFile',
@@ -182,7 +181,10 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 				text: res,
 			};
 
-			changelog.writeToFile();
+			const success = changelog.writeToFile();
+			if (success) {
+				vscode.commands.executeCommand('simple-changelog.changelogs.refresh');
+			}
 		}
 	}
 
