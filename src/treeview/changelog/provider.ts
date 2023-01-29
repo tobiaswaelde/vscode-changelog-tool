@@ -1,5 +1,4 @@
 import * as vscode from 'vscode';
-import * as fs from 'fs';
 import { Changelog } from '../../classes/changelog';
 import { ChangelogFolderTreeItem } from './items/folder-tree-item';
 import { ChangelogItemTreeItem } from './items/item-tree-item';
