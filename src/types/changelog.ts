@@ -16,6 +16,6 @@ export type ChangelogItem = {
 
 export type ChangelogVersion = {
 	label: string;
-	date: string;
+	date?: string;
 	items: ChangelogItem[];
 };

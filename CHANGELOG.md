@@ -1,8 +1,9 @@
 # Changelog
 
-All notable changes to the "vscode-simple-changelog" extension will be documented in this file.
+## [unreleased]
+### Fixed
+- minor fixes in changelog file export: date will not be exported as `undefined`
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [0.0.5] - 2023-01.29
 ### Added

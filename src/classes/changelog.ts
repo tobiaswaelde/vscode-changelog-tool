@@ -125,7 +125,11 @@ export class Changelog {
 		}
 	}
 	private static stringifyVersion(version: ChangelogVersion): string {
-		let res = `\n\n## [${version.label}] - ${version.date}\n`;
+		let res = `## [${version.label}]`;
+		if (version.date) {
+			res += ` - ${version.date}`;
+		}
+		res += '\n';
 
 		const items = [
 			this.stringifyItems(version, 'addition'),
