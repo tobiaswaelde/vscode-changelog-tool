@@ -1,6 +1,5 @@
-import { ChangelogItem } from './../types/changelog';
+import { ChangelogItem, ItemType, LineType, ChangelogVersion } from './../types/changelog';
 import * as fs from 'fs';
-import { ItemType, LineType, ChangelogVersion } from '../types/changelog';
 
 export class Changelog {
 	public versions: ChangelogVersion[] = [];
@@ -40,15 +39,15 @@ export class Changelog {
 		let itemType: ItemType = 'none';
 
 		for (const line of lines) {
-			lineType = this.getLineType(line);
+			lineType = this.parseLineType(line);
 
 			if (lineType === 'version') {
-				const v = this.getVersion(line);
+				const v = this.parseVersion(line);
 				if (v) {
 					changelog.versions.push(v);
 				}
 			} else if (lineType === 'type') {
-				itemType = this.getItemType(line);
+				itemType = this.parseItemType(line);
 			} else if (lineType === 'item') {
 				const text = line.substring(1).trim();
 				const item: ChangelogItem = { type: itemType, text };
@@ -60,11 +59,11 @@ export class Changelog {
 	}
 	public toString() {
 		let x = '# Changelog\n\n';
-		x += this.versions.map((v) => this.versionToString(v)).join('\n\n');
+		x += this.versions.map((v) => Changelog.stringifyVersion(v)).join('\n\n\n');
 		return x;
 	}
 
-	private static getLineType(line: string): LineType {
+	private static parseLineType(line: string): LineType {
 		if (line.startsWith('## ')) {
 			return 'version';
 		}
@@ -76,7 +75,7 @@ export class Changelog {
 		}
 		return 'none';
 	}
-	private static getVersion(line: string): ChangelogVersion | undefined {
+	private static parseVersion(line: string): ChangelogVersion | undefined {
 		const match = line.match(/## \[(?<version>.+)](\s*\-\s*(?<date>\d{4}-\d{2}-\d{2}))?/);
 		if (match && match.groups) {
 			return {
@@ -86,7 +85,7 @@ export class Changelog {
 			};
 		}
 	}
-	private static getItemType(line: string): ItemType {
+	private static parseItemType(line: string): ItemType {
 		const type = line.replace(/\*\*/g, '').replace(/\#{3}/g, '').trim();
 
 		switch (type) {
@@ -107,48 +106,47 @@ export class Changelog {
 				return 'none';
 		}
 	}
+	private static stringifyItemType(itemType: ItemType): string {
+		switch (itemType) {
+			case 'addition':
+				return 'Added';
+			case 'change':
+				return 'Changed';
+			case 'deprecation':
+				return 'Deprecated';
+			case 'fix':
+				return 'Fixed';
+			case 'removal':
+				return 'Removed';
+			case 'securityChange':
+				return 'Security';
+			case 'none':
+				return 'Misc';
+		}
+	}
+	private static stringifyVersion(version: ChangelogVersion): string {
+		let res = `\n\n## [${version.label}] - ${version.date}\n`;
 
-	private versionToString(v: ChangelogVersion) {
-		let x = `\n\n## [${v.label}] - ${v.date}`;
+		const items = [
+			this.stringifyItems(version, 'addition'),
+			this.stringifyItems(version, 'change'),
+			this.stringifyItems(version, 'deprecation'),
+			this.stringifyItems(version, 'fix'),
+			this.stringifyItems(version, 'removal'),
+			this.stringifyItems(version, 'securityChange'),
+		].filter((x): x is string => !!x);
 
-		const additions = v.items.filter((x) => x.type === 'addition');
-		const changes = v.items.filter((x) => x.type === 'change');
-		const deprecations = v.items.filter((x) => x.type === 'deprecation');
-		const fixes = v.items.filter((x) => x.type === 'fix');
-		const removals = v.items.filter((x) => x.type === 'removal');
-		const securityChanges = v.items.filter((x) => x.type === 'securityChange');
-
-		if (additions.length > 0) {
-			x += `\n**Added**\n`;
-			x += additions.map((x) => `- ${x.text}`).join('\n');
-			x += '\n';
-		}
-		if (changes.length > 0) {
-			x += `\n**Changed**\n`;
-			x += changes.map((x) => `- ${x.text}`).join('\n');
-			x += '\n';
-		}
-		if (deprecations.length > 0) {
-			x += `\n**Deprecated**\n`;
-			x += deprecations.map((x) => `- ${x.text}`).join('\n');
-			x += '\n';
-		}
-		if (fixes.length > 0) {
-			x += `\n**Fixed**\n`;
-			x += fixes.map((x) => `- ${x.text}`).join('\n');
-			x += '\n';
-		}
-		if (removals.length > 0) {
-			x += `\n**Removed**\n`;
-			x += removals.map((x) => `- ${x.text}`).join('\n');
-			x += '\n';
-		}
-		if (securityChanges.length > 0) {
-			x += `\n**Security**\n`;
-			x += securityChanges.map((x) => `- ${x.text}`).join('\n');
-			x += '\n';
+		res += items.join('\n\n');
+		return res.trim();
+	}
+	private static stringifyItems(version: ChangelogVersion, itemType: ItemType): string {
+		const items = version.items.filter((x) => x.type === itemType);
+		if (items.length === 0) {
+			return '';
 		}
 
-		return x.trim();
+		let res = `### ${Changelog.stringifyItemType(itemType)}\n`;
+		res += items.map((x) => `- ${x.text}`).join('\n');
+		return res.trim();
 	}
 }
