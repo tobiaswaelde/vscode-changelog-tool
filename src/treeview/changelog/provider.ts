@@ -48,43 +48,21 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 
 		if (element instanceof ChangelogVersionTreeItem) {
 			const { changelog, version } = element;
+
+			const additions = version.items.filter((x) => x.type === 'addition');
+			const changes = version.items.filter((x) => x.type === 'change');
+			const deprecations = version.items.filter((x) => x.type === 'deprecation');
+			const fixes = version.items.filter((x) => x.type === 'fix');
+			const removals = version.items.filter((x) => x.type === 'removal');
+			const securityChanges = version.items.filter((x) => x.type === 'securityChange');
+
 			return [
-				new ChangelogTypeTreeItem(
-					changelog,
-					version,
-					'addition',
-					version.items.filter((x) => x.type === 'addition')
-				),
-				new ChangelogTypeTreeItem(
-					changelog,
-					version,
-					'change',
-					version.items.filter((x) => x.type === 'change')
-				),
-				new ChangelogTypeTreeItem(
-					changelog,
-					version,
-					'deprecation',
-					version.items.filter((x) => x.type === 'deprecation')
-				),
-				new ChangelogTypeTreeItem(
-					changelog,
-					version,
-					'fix',
-					version.items.filter((x) => x.type === 'fix')
-				),
-				new ChangelogTypeTreeItem(
-					changelog,
-					version,
-					'removal',
-					version.items.filter((x) => x.type === 'removal')
-				),
-				new ChangelogTypeTreeItem(
-					changelog,
-					version,
-					'securityChange',
-					version.items.filter((x) => x.type === 'securityChange')
-				),
+				new ChangelogTypeTreeItem(changelog, version, 'addition', additions),
+				new ChangelogTypeTreeItem(changelog, version, 'change', changes),
+				new ChangelogTypeTreeItem(changelog, version, 'deprecation', deprecations),
+				new ChangelogTypeTreeItem(changelog, version, 'fix', fixes),
+				new ChangelogTypeTreeItem(changelog, version, 'removal', removals),
+				new ChangelogTypeTreeItem(changelog, version, 'securityChange', securityChanges),
 			];
 		}
 
