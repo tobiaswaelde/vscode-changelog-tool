@@ -1,6 +1,9 @@
 # Changelog
 
 ## [unreleased]
+### Added
+- option to open referencing changelog file
+
 ### Fixed
 - minor fixes in changelog file export: date will not be exported as `undefined`
 

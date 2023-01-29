@@ -15,8 +15,13 @@ export async function initialize() {
 		const filename = path.join(workspace, 'CHANGELOG.md');
 		if (!fs.existsSync(filename)) {
 			const changelog = new Changelog(filename);
-			fs.writeFileSync(filename, changelog.toString());
+			fs.writeFileSync(filename, changelog.toString(), 'utf8');
 		}
+
+		// open file in editor
+		const file = vscode.Uri.file(filename);
+		const doc = await vscode.workspace.openTextDocument(file);
+		vscode.window.showTextDocument(doc);
 
 		// set extension to 'initialized'
 		setContext('initialized', true);
