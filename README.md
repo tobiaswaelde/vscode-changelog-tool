@@ -6,6 +6,8 @@
 ## Configuration
 - option enable/disable colored icons
 - option to enable/disable changelog item type grouping
+- search file regex
+- exclude search regex
 
 
 ## Attributions
