@@ -6,7 +6,7 @@ export async function editItem(element: ChangelogItemTreeItem) {
 
 	// ask for new item text
 	const res = await vscode.window.showInputBox({
-		title: 'Edit item text',
+		title: 'Edit item text:',
 		value: element.label?.toString(),
 	});
 	if (!res) {
