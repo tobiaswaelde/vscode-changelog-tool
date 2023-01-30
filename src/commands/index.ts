@@ -3,6 +3,6 @@ import { initialize } from './initialize';
 
 export function registerCommands(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
-		vscode.commands.registerCommand('simple-changelog.initialize', initialize)
+		vscode.commands.registerCommand('simplechangelog.initialize', initialize)
 	);
 }

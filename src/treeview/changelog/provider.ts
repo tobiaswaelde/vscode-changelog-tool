@@ -11,6 +11,7 @@ import { addVersion } from './commands/add-version';
 import { openChangelogFile } from './commands/open-changelog-file';
 import { addItem } from './commands/add-item';
 import { deleteItem } from './commands/delete-item';
+import { editVersion } from './commands/edit-version';
 
 type ChangelogTreeItem =
 	| ChangelogFolderTreeItem
@@ -76,16 +77,17 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 		}
 	}
 
-	private registerCommands(context: vscode.ExtensionContext) {
+	public registerCommands(context: vscode.ExtensionContext) {
 		context.subscriptions.push(
 			vscode.commands.registerCommand(
-				'simple-changelog.changelogs.openChangelogFile',
+				'simplechangelog.changelogs.openChangelogFile',
 				openChangelogFile
 			),
-			vscode.commands.registerCommand('simple-changelog.changelogs.addVersion', addVersion),
-			vscode.commands.registerCommand('simple-changelog.changelogs.addItem', addItem),
-			vscode.commands.registerCommand('simple-changelog.changelogs.editItem', editItem),
-			vscode.commands.registerCommand('simple-changelog.changelogs.deleteItem', deleteItem)
+			vscode.commands.registerCommand('simplechangelog.changelogs.editVersion', editVersion),
+			vscode.commands.registerCommand('simplechangelog.changelogs.addVersion', addVersion),
+			vscode.commands.registerCommand('simplechangelog.changelogs.addItem', addItem),
+			vscode.commands.registerCommand('simplechangelog.changelogs.editItem', editItem),
+			vscode.commands.registerCommand('simplechangelog.changelogs.deleteItem', deleteItem)
 		);
 	}
 

@@ -14,9 +14,11 @@ export function activate(context: vscode.ExtensionContext) {
 		treeDataProvider: provider,
 		showCollapseAll: true,
 	});
-	vscode.commands.registerCommand('simple-changelog.changelogs.refresh', () => provider.refresh());
+	vscode.commands.registerCommand('simplechangelog.changelogs.refresh', () => provider.refresh());
 
 	registerCommands(context);
 }
 
-export function deactivate() {}
+export function deactivate() {
+	//
+}

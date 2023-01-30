@@ -3,6 +3,7 @@
 ## [unreleased]
 ### Added
 - option to open referencing changelog file
+- option to edit changelog version
 
 ### Fixed
 - minor fixes in changelog file export: date will not be exported as `undefined`

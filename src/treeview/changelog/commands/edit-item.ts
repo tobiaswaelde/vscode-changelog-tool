@@ -1,36 +1,39 @@
 import * as vscode from 'vscode';
 import { ChangelogItemTreeItem } from '../items/item-tree-item';
 
-export async function editItem(item: ChangelogItemTreeItem) {
+export async function editItem(element: ChangelogItemTreeItem) {
+	const { changelog } = element;
+
+	// ask for new item text
 	const res = await vscode.window.showInputBox({
 		prompt: 'Edit item content',
 		title: 'Edit item',
-		value: item.label?.toString(),
+		value: element.label?.toString(),
 	});
-	if (res) {
-		const changelog = item.changelog;
+	if (!res) {
+		return;
+	}
 
-		// get index of version in version array
-		const vx = changelog.versions.findIndex((x) => x.label === item.version.label);
-		if (vx === -1) {
-			return;
-		}
+	// get version
+	const version = changelog.versions.find((x) => x.label === element.version.label);
+	if (!version) {
+		return;
+	}
 
-		// get index of item in item array inside version
-		const ix = changelog.versions[vx].items.findIndex(
-			(x) => x.type === item.item.type && x.text === item.item.text
-		);
+	// get item
+	const item = version.items.find(
+		(x) => x.type === element.item.type && x.text === element.item.text
+	);
+	if (!item) {
+		return;
+	}
 
-		// update item in changelog
-		changelog.versions[vx].items[ix] = {
-			type: changelog.versions[vx].items[ix].type,
-			text: res,
-		};
+	// update item in changelog
+	item.text = res;
 
-		// update changelog file & refresh treeview
-		const success = changelog.writeToFile();
-		if (success) {
-			vscode.commands.executeCommand('simple-changelog.changelogs.refresh');
-		}
+	// update changelog file & refresh treeview
+	const success = changelog.writeToFile();
+	if (success) {
+		vscode.commands.executeCommand('simplechangelog.changelogs.refresh');
 	}
 }

@@ -39,8 +39,8 @@
     "viewsWelcome": [
       {
         "view": "changelog-explorer",
-        "contents": "No changelogs found.\n[Create initial changelog](command:simple-changelog.initialize)",
-        "when": "!simple-changelog.initialized"
+        "contents": "No changelogs found.\n[Create initial changelog](command:simplechangelog.initialize)",
+        "when": "!simplechangelog.initialized"
       }
     ],
     "viewsContainers": {
@@ -63,44 +63,51 @@
     },
     "commands": [
       {
-        "command": "simple-changelog.initialize",
+        "command": "simplechangelog.initialize",
         "category": "Simple Changelog",
         "title": "Create initial changelog"
       },
       {
-        "command": "simple-changelog.changelogs.refresh",
+        "command": "simplechangelog.changelogs.refresh",
         "category": "Simple Changelog",
         "title": "Refresh Changelogs",
         "shortTitle": "Refresh",
         "icon": "$(refresh)"
       },
       {
-        "command": "simple-changelog.changelogs.addVersion",
+        "command": "simplechangelog.changelogs.addVersion",
         "category": "Simple Changelog",
         "title": "Add Version to Changelog",
         "shortTitle": "Add Version",
         "icon": "$(add)"
       },
       {
-        "command": "simple-changelog.changelogs.openChangelogFile",
+        "command": "simplechangelog.changelogs.editVersion",
+        "category": "Simple Changelog",
+        "title": "Edit Version",
+        "shortTitle": "Edit Version",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "simplechangelog.changelogs.openChangelogFile",
         "category": "Simple Changelog",
         "title": "Open referencing changelog file",
         "shortTitle": "Open file",
         "icon": "$(eye)"
       },
       {
-        "command": "simple-changelog.changelogs.addItem",
+        "command": "simplechangelog.changelogs.addItem",
         "category": "Simple Changelog",
         "title": "Add Item",
         "icon": "$(add)"
       },
       {
-        "command": "simple-changelog.changelogs.deleteItem",
+        "command": "simplechangelog.changelogs.deleteItem",
         "category": "Simple Changelog",
         "title": "Delete Item"
       },
       {
-        "command": "simple-changelog.changelogs.editItem",
+        "command": "simplechangelog.changelogs.editItem",
         "category": "Simple Changelog",
         "title": "Edit",
         "icon": "$(edit)"
@@ -109,32 +116,37 @@
     "menus": {
       "view/title": [
         {
-          "command": "simple-changelog.changelogs.refresh",
-          "when": "view == changelog-explorer && simple-changelog.initialized",
+          "command": "simplechangelog.changelogs.refresh",
+          "when": "view == changelog-explorer && simplechangelog.initialized",
           "group": "navigation"
         }
       ],
       "view/item/context": [
         {
-          "command": "simple-changelog.changelogs.addVersion",
+          "command": "simplechangelog.changelogs.openChangelogFile",
+          "when": "view == changelog-explorer && viewItem == changelog-folder"
+        },
+        {
+          "command": "simplechangelog.changelogs.addVersion",
           "when": "view == changelog-explorer && viewItem == changelog-folder",
           "group": "inline"
         },
         {
-          "command": "simple-changelog.changelogs.openChangelogFile",
-          "when": "view == changelog-explorer && viewItem == changelog-folder"
+          "command": "simplechangelog.changelogs.editVersion",
+          "when": "viewItem == changelog-version",
+          "group": "inline"
         },
         {
-          "command": "simple-changelog.changelogs.addItem",
+          "command": "simplechangelog.changelogs.addItem",
           "when": "view == changelog-explorer && viewItem == changelog-type",
           "group": "inline"
         },
         {
-          "command": "simple-changelog.changelogs.deleteItem",
+          "command": "simplechangelog.changelogs.deleteItem",
           "when": "view == changelog-explorer && viewItem == changelog-item"
         },
         {
-          "command": "simple-changelog.changelogs.editItem",
+          "command": "simplechangelog.changelogs.editItem",
           "when": "view == changelog-explorer && viewItem == changelog-item",
           "group": "inline"
         }
