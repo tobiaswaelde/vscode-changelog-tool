@@ -8,6 +8,7 @@
 - option to enable/disable changelog item type grouping
 - search file regex
 - exclude search regex
+- option to pretty-print date
 
 
 ## Attributions
