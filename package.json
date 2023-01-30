@@ -150,7 +150,7 @@
         },
         {
           "command": "simplechangelog.changelogs.addItem",
-          "when": "view == changelog-explorer && viewItem == changelog-type",
+          "when": "viewItem == changelog-type || viewItem == changelog-version",
           "group": "inline"
         },
         {

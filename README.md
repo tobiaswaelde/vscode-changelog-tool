@@ -7,7 +7,7 @@
 - [x] add version
 - [x] edit version
 - [x] delete version
-- [ ] add item
+- [x] add item
 - [x] edit item
 - [ ] delete item
 
