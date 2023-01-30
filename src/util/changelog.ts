@@ -13,8 +13,9 @@ type ItemTypeData = {
 	color: string;
 };
 type ItemTypes = {
-	[key in keyof ItemType as ItemType]: ItemTypeData;
+	[key in ItemType]: ItemTypeData;
 };
+
 export const itemTypes: ItemTypes = {
 	addition: {
 		singular: 'Addition',
@@ -58,17 +59,4 @@ export const itemTypes: ItemTypes = {
 		icon: 'warning',
 		color: 'charts.orange',
 	},
-	// none: {
-	// 	singular: 'None',
-	// 	plural: 'None',
-	// 	header: '',
-	// 	icon: '',
-	// 	color: '',
-	// },
 };
-
-function find<T, K = keyof T>(obj: T, key: any, value: string): keyof T | undefined {
-	return undefined;
-}
-
-find(itemTypes, 'header', '123');

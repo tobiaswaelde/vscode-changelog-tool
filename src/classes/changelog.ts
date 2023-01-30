@@ -37,7 +37,7 @@ export class Changelog {
 		const lines = data.split('\n').map((x) => x.trim());
 
 		let lineType: LineType = 'none';
-		let itemType: ItemType = undefined!; // = 'none';
+		let itemType: ItemType | undefined = undefined; // = 'none';
 
 		for (const line of lines) {
 			lineType = this.parseLineType(line);
@@ -90,16 +90,7 @@ export class Changelog {
 	private static parseItemType(line: string): ItemType | undefined {
 		const type = line.replace(/\*\*/g, '').replace(/\#{3}/g, '').trim();
 		const key = findKey(itemTypes, 'header', type);
-		console.log(type, key);
-
 		return key;
-
-		// const key: ItemType | undefined =
-		// 	(Object.keys(itemTypes).find((x) => itemTypes[x as ItemType].header === type) as
-		// 		| ItemType
-		// 		| undefined) || undefined;
-
-		// return key;
 	}
 	private static stringifyItemType(itemType: ItemType): string {
 		return itemTypes[itemType].header;
