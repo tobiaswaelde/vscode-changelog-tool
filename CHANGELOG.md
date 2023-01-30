@@ -1,10 +1,12 @@
 # Changelog
 
-## [unreleased]
+## [0.0.6]
 ### Added
 - option to open referencing changelog file
 - option to edit changelog version
 - option to add new version to changelog
+- option to add item
+- option to delete item
 
 ### Fixed
 - minor fixes in changelog file export: date will not be exported as `undefined`
