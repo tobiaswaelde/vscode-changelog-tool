@@ -1,5 +1,7 @@
+import { itemTypes } from './../util/changelog';
 import { ChangelogItem, ItemType, LineType, ChangelogVersion } from './../types/changelog';
 import * as fs from 'fs';
+import { findKey } from '../util/object';
 
 export class Changelog {
 	public versions: ChangelogVersion[] = [];
@@ -35,7 +37,7 @@ export class Changelog {
 		const lines = data.split('\n').map((x) => x.trim());
 
 		let lineType: LineType = 'none';
-		let itemType: ItemType = 'none';
+		let itemType: ItemType = undefined!; // = 'none';
 
 		for (const line of lines) {
 			lineType = this.parseLineType(line);
@@ -47,7 +49,7 @@ export class Changelog {
 				}
 			} else if (lineType === 'type') {
 				itemType = this.parseItemType(line);
-			} else if (lineType === 'item') {
+			} else if (lineType === 'item' && itemType) {
 				const text = line.substring(1).trim();
 				const item: ChangelogItem = { type: itemType, text };
 				changelog.versions[changelog.versions.length - 1].items.push(item);
@@ -85,44 +87,22 @@ export class Changelog {
 			};
 		}
 	}
-	private static parseItemType(line: string): ItemType {
+	private static parseItemType(line: string): ItemType | undefined {
 		const type = line.replace(/\*\*/g, '').replace(/\#{3}/g, '').trim();
+		const key = findKey(itemTypes, 'header', type);
+		console.log(type, key);
 
-		switch (type) {
-			case 'Added':
-				return 'addition';
-			case 'Changed':
-				return 'change';
-			case 'Deprecated':
-				return 'deprecation';
-			case 'Fixed':
-				return 'fix';
-			case 'Removed':
-				return 'removal';
-			case 'Security':
-				return 'securityChange';
+		return key;
 
-			default:
-				return 'none';
-		}
+		// const key: ItemType | undefined =
+		// 	(Object.keys(itemTypes).find((x) => itemTypes[x as ItemType].header === type) as
+		// 		| ItemType
+		// 		| undefined) || undefined;
+
+		// return key;
 	}
 	private static stringifyItemType(itemType: ItemType): string {
-		switch (itemType) {
-			case 'addition':
-				return 'Added';
-			case 'change':
-				return 'Changed';
-			case 'deprecation':
-				return 'Deprecated';
-			case 'fix':
-				return 'Fixed';
-			case 'removal':
-				return 'Removed';
-			case 'securityChange':
-				return 'Security';
-			case 'none':
-				return 'Misc';
-		}
+		return itemTypes[itemType].header;
 	}
 	private static stringifyVersion(version: ChangelogVersion): string {
 		let res = `## [${version.label}]`;
