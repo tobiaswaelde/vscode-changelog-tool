@@ -131,12 +131,13 @@
       "view/item/context": [
         {
           "command": "simplechangelog.changelogs.openChangelogFile",
-          "when": "view == changelog-explorer && viewItem == changelog-folder"
+          "when": "view == changelog-explorer && viewItem == changelog-folder",
+          "group": "inline@1"
         },
         {
           "command": "simplechangelog.changelogs.addVersion",
           "when": "view == changelog-explorer && viewItem == changelog-folder",
-          "group": "inline"
+          "group": "inline@2"
         },
         {
           "command": "simplechangelog.changelogs.editVersion",

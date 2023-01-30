@@ -2,6 +2,14 @@
 
 *Work in Progress*
 
+## ToDo
+- [x] open changelog file
+- [x] add version
+- [x] edit version
+- [x] delete version
+- [ ] add item
+- [x] edit item
+- [ ] delete item
 
 ## Configuration
 - option enable/disable colored icons
