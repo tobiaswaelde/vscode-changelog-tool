@@ -83,15 +83,15 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 	public registerCommands(context: vscode.ExtensionContext) {
 		context.subscriptions.push(
 			vscode.commands.registerCommand(
-				'simplechangelog.changelogs.openChangelogFile',
+				'simpleChangelog.changelogs.openChangelogFile',
 				openChangelogFile
 			),
-			vscode.commands.registerCommand('simplechangelog.changelogs.addVersion', addVersion),
-			vscode.commands.registerCommand('simplechangelog.changelogs.editVersion', editVersion),
-			vscode.commands.registerCommand('simplechangelog.changelogs.deleteVersion', deleteVersion),
-			vscode.commands.registerCommand('simplechangelog.changelogs.addItem', addItem),
-			vscode.commands.registerCommand('simplechangelog.changelogs.editItem', editItem),
-			vscode.commands.registerCommand('simplechangelog.changelogs.deleteItem', deleteItem)
+			vscode.commands.registerCommand('simpleChangelog.changelogs.addVersion', addVersion),
+			vscode.commands.registerCommand('simpleChangelog.changelogs.editVersion', editVersion),
+			vscode.commands.registerCommand('simpleChangelog.changelogs.deleteVersion', deleteVersion),
+			vscode.commands.registerCommand('simpleChangelog.changelogs.addItem', addItem),
+			vscode.commands.registerCommand('simpleChangelog.changelogs.editItem', editItem),
+			vscode.commands.registerCommand('simpleChangelog.changelogs.deleteItem', deleteItem)
 		);
 	}
 

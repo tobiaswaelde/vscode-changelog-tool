@@ -13,5 +13,5 @@ export function getContext(): vscode.ExtensionContext {
 }
 
 export function setContext(key: ContextValue, value: any) {
-	vscode.commands.executeCommand('setContext', `simplechangelog.${key}`, value);
+	vscode.commands.executeCommand('setContext', `simpleChangelog.${key}`, value);
 }

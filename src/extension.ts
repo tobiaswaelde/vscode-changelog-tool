@@ -14,9 +14,17 @@ export function activate(context: vscode.ExtensionContext) {
 		treeDataProvider: provider,
 		showCollapseAll: true,
 	});
-	vscode.commands.registerCommand('simplechangelog.changelogs.refresh', () => provider.refresh());
+	vscode.commands.registerCommand('simpleChangelog.changelogs.refresh', () => provider.refresh());
 
 	registerCommands(context);
+
+	// refresh treeview when config changes
+	vscode.workspace.onDidChangeConfiguration((e) => {
+		// only listen for config changes in simpleChangelog config
+		if (e.affectsConfiguration('simpleChangelog')) {
+			vscode.commands.executeCommand('simpleChangelog.changelogs.refresh');
+		}
+	});
 }
 
 export function deactivate() {

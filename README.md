@@ -12,6 +12,7 @@
 - [x] delete item
 
 ## Configuration
+- `simpleChangelog.icons.color.enabled`
 - option enable/disable colored icons
 - option to enable/disable changelog item type grouping
 - search file regex

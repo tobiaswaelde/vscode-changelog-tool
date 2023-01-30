@@ -2,6 +2,7 @@ import { Changelog } from './../../../classes/changelog';
 import * as vscode from 'vscode';
 import { ItemType, ChangelogVersion, ChangelogItem } from '../../../types/changelog';
 import { getIconColorFromItemType } from '../../util';
+import { getConfig } from '../../../config';
 
 export class ChangelogItemTreeItem extends vscode.TreeItem {
 	contextValue?: string | undefined = 'changelog-item';
@@ -15,11 +16,9 @@ export class ChangelogItemTreeItem extends vscode.TreeItem {
 		super(item.text, vscode.TreeItemCollapsibleState.None);
 
 		this.tooltip = item.text;
-		this.iconPath = new vscode.ThemeIcon('circle-filled', getIconColorFromItemType(type));
-	}
 
-	command?: vscode.Command | undefined = {
-		command: 'simple-changelog.item.select',
-		title: 'CLICK',
-	};
+		const colorEnabled = getConfig<boolean>('icons.color.enabled') ?? true;
+		const color = colorEnabled ? getIconColorFromItemType(type) : undefined;
+		this.iconPath = new vscode.ThemeIcon('circle-filled', color);
+	}
 }

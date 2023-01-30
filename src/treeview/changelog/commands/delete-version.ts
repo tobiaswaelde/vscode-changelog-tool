@@ -10,6 +10,6 @@ export async function deleteVersion(element: ChangelogVersionTreeItem) {
 	// update changelog file & refresh treeview
 	const success = changelog.writeToFile();
 	if (success) {
-		vscode.commands.executeCommand('simplechangelog.changelogs.refresh');
+		vscode.commands.executeCommand('simpleChangelog.changelogs.refresh');
 	}
 }

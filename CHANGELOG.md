@@ -1,8 +1,16 @@
 # Changelog
 
+## [1.0.1] - 2023-01-30
+### Added
+- setting to enable/disable icon color
+
+### Changed
+- rename `simplechangelog` to `simpleChangelog` everywhere in the project
+
 ## [1.0.0] - 2023-01-30
 ### Changed
 - ask again for version if version already exists
+
 
 ## [0.0.6] - 2023-01-30
 ### Added
