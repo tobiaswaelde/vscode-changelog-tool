@@ -7,8 +7,7 @@ export async function editVersion(element: ChangelogVersionTreeItem) {
 
 	// ask for new label
 	const res = await vscode.window.showInputBox({
-		prompt: 'Edit version',
-		title: 'Edit version',
+		title: 'Edit version label',
 		value: element.version.label,
 	});
 	if (!res) {
