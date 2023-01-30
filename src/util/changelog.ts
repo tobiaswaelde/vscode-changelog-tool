@@ -50,7 +50,7 @@ export const itemTypes: ItemTypes = {
 		plural: 'Removals',
 		header: 'Removed',
 		icon: 'circle-slash',
-		color: 'termminal.ansiRed',
+		color: 'charts.red',
 	},
 	securityChange: {
 		singular: 'SecurityChange',
