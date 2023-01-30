@@ -1,3 +1,4 @@
+import { getConfig } from '../config';
 import { ItemType } from '../types/changelog';
 
 export function getCurrentDate(): string {
@@ -16,12 +17,12 @@ type ItemTypes = {
 	[key in ItemType]: ItemTypeData;
 };
 
-export const itemTypes: ItemTypes = {
+export const getItemTypes = (): ItemTypes => ({
 	addition: {
 		singular: 'Addition',
 		plural: 'Additions',
 		header: 'Added',
-		icon: 'add',
+		icon: getConfig<string>('icons.additions') ?? 'add',
 		color: 'charts.green',
 	},
 	change: {
@@ -59,4 +60,4 @@ export const itemTypes: ItemTypes = {
 		icon: 'warning',
 		color: 'charts.orange',
 	},
-};
+});
