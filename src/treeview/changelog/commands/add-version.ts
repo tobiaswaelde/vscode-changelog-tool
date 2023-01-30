@@ -6,23 +6,32 @@ import { ChangelogFolderTreeItem } from '../items/folder-tree-item';
 export async function addVersion(element: ChangelogFolderTreeItem) {
 	const { changelog } = element;
 
-	// ask for new version string
-	const res = await vscode.window.showInputBox({
-		title: 'Enter new version:',
-	});
-	if (!res) {
-		return;
-	}
+	let label: string = '';
+	let versionExists: boolean = false;
 
-	// check if version already exists
-	if (changelog.versions.find((x) => x.label === res)) {
-		vscode.window.showErrorMessage('Version already exists.');
-		return;
-	}
+	do {
+		// ask for new version string
+		const res = await vscode.window.showInputBox({
+			title: 'Enter new version:',
+			value: label,
+		});
+		if (!res) {
+			return;
+		}
+
+		label = res;
+
+		// check if version already exists
+		versionExists = changelog.versions.find((x) => x.label === res) !== undefined;
+		if (versionExists) {
+			vscode.window.showErrorMessage('Version already exists.');
+			continue;
+		}
+	} while (versionExists);
 
 	// add version to changelog
 	const newVersion: ChangelogVersion = {
-		label: res,
+		label: label,
 		date: getCurrentDate(),
 		items: [],
 	};
