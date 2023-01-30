@@ -78,9 +78,10 @@ export class Changelog {
 	private static parseVersion(line: string): ChangelogVersion | undefined {
 		const match = line.match(/## \[(?<version>.+)](\s*\-\s*(?<date>\d{4}-\d{2}-\d{2}))?/);
 		if (match && match.groups) {
+			const { version, date } = match.groups;
 			return {
-				label: match.groups['version'],
-				date: match.groups['date'],
+				label: version,
+				date: date,
 				items: [],
 			};
 		}
