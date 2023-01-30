@@ -21,7 +21,6 @@ export class Changelog {
 		return true;
 	}
 	public writeToFile(): boolean {
-		console.log('writeToFile', this);
 		if (!this.filepath) {
 			return false;
 		}

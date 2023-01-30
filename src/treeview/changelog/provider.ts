@@ -19,12 +19,14 @@ type ChangelogTreeItem =
 	| ChangelogTypeTreeItem
 	| ChangelogItemTreeItem;
 
+type OnDidChangeEventData = ChangelogTreeItem | undefined | null | void;
+
 export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeItem> {
 	private filepaths: string[] = [];
 
-	private _onDidChangeTreeData: vscode.EventEmitter<ChangelogTreeItem | undefined | null | void> =
-		new vscode.EventEmitter<ChangelogTreeItem | undefined | null | void>();
-	readonly onDidChangeTreeData: vscode.Event<ChangelogTreeItem | undefined | null | void> =
+	private _onDidChangeTreeData: vscode.EventEmitter<OnDidChangeEventData> =
+		new vscode.EventEmitter<OnDidChangeEventData>();
+	readonly onDidChangeTreeData: vscode.Event<OnDidChangeEventData> =
 		this._onDidChangeTreeData.event;
 
 	constructor(context: vscode.ExtensionContext) {
@@ -92,8 +94,6 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 	}
 
 	public refresh(): void {
-		console.log('ChangelogProvider:refresh()');
-
 		const workspaces = getWorkspacePaths();
 		if (!workspaces) {
 			this.filepaths = [];
