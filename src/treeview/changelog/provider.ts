@@ -12,6 +12,7 @@ import { openChangelogFile } from './commands/open-changelog-file';
 import { addItem } from './commands/add-item';
 import { deleteItem } from './commands/delete-item';
 import { editVersion } from './commands/edit-version';
+import { deleteVersion } from './commands/delete-version';
 
 type ChangelogTreeItem =
 	| ChangelogFolderTreeItem
@@ -85,8 +86,9 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 				'simplechangelog.changelogs.openChangelogFile',
 				openChangelogFile
 			),
-			vscode.commands.registerCommand('simplechangelog.changelogs.editVersion', editVersion),
 			vscode.commands.registerCommand('simplechangelog.changelogs.addVersion', addVersion),
+			vscode.commands.registerCommand('simplechangelog.changelogs.editVersion', editVersion),
+			vscode.commands.registerCommand('simplechangelog.changelogs.deleteVersion', deleteVersion),
 			vscode.commands.registerCommand('simplechangelog.changelogs.addItem', addItem),
 			vscode.commands.registerCommand('simplechangelog.changelogs.editItem', editItem),
 			vscode.commands.registerCommand('simplechangelog.changelogs.deleteItem', deleteItem)

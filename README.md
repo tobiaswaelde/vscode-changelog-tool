@@ -1,7 +1,11 @@
 # Simple Changelog
 
-Work in Progress
+*Work in Progress*
 
+
+## Configuration
+- option enable/disable colored icons
+- option to enable/disable changelog item type grouping
 
 
 ## Attributions

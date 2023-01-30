@@ -82,6 +82,13 @@
         "icon": "$(add)"
       },
       {
+        "command": "simplechangelog.changelogs.deleteVersion",
+        "category": "Simple Changelog",
+        "title": "Delete Version from Changelog",
+        "shortTitle": "Delete",
+        "icon": "$(delete)"
+      },
+      {
         "command": "simplechangelog.changelogs.editVersion",
         "category": "Simple Changelog",
         "title": "Edit Version",
@@ -135,6 +142,10 @@
           "command": "simplechangelog.changelogs.editVersion",
           "when": "viewItem == changelog-version",
           "group": "inline"
+        },
+        {
+          "command": "simplechangelog.changelogs.deleteVersion",
+          "when": "viewItem == changelog-version"
         },
         {
           "command": "simplechangelog.changelogs.addItem",
