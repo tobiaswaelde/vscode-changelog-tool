@@ -9,7 +9,7 @@
 - [x] delete version
 - [x] add item
 - [x] edit item
-- [ ] delete item
+- [x] delete item
 
 ## Configuration
 - option enable/disable colored icons
