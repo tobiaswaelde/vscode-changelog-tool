@@ -112,7 +112,7 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 		);
 
 		// show welcome view is no changelogs found
-		if (changelogPaths.length === 1) {
+		if (changelogPaths.length === 0) {
 			this.filepaths = [];
 			this._onDidChangeTreeData.fire();
 			setContext('initialized', false);

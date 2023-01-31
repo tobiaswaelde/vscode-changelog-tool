@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.2] - 2023-01-31
+### Fixed
+- show welcome view if no changelog was found
+
+
 ## [1.0.1] - 2023-01-30
 ### Added
 - setting to enable/disable icon color
