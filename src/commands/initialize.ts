@@ -13,9 +13,16 @@ export async function initialize() {
 
 		// create file `CHANGELOG.md`
 		const filename = path.join(workspace, 'CHANGELOG.md');
+		console.log({ filename });
 		if (!fs.existsSync(filename)) {
+			// create file
+			fs.writeFileSync(filename, '', 'utf-8');
+
+			// create changelog from created file
 			const changelog = new Changelog(filename);
-			fs.writeFileSync(filename, changelog.toString(), 'utf8');
+
+			// write changelog to file
+			fs.writeFileSync(filename, changelog.toString(), 'utf-8');
 		}
 
 		// open file in editor

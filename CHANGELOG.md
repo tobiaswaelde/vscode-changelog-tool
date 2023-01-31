@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.3] - 2023-01-31
+### Fixed
+- fix changelog initialization from welcome view
+
+
 ## [1.0.2] - 2023-01-31
 ### Fixed
 - show welcome view if no changelog was found
@@ -11,6 +16,7 @@
 
 ### Changed
 - rename `simplechangelog` to `simpleChangelog` everywhere in the project
+
 
 ## [1.0.0] - 2023-01-30
 ### Changed
