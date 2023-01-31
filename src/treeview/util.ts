@@ -1,16 +1,17 @@
 import { ThemeColor, ThemeIcon } from 'vscode';
 import { getConfig } from '../config';
 import { ItemType } from '../types/changelog';
-import { getItemTypes } from '../util/changelog';
+import { itemTypes } from '../util/changelog';
 
 export function getIconFromItemType(type: ItemType) {
-	const itemTypes = getItemTypes();
 	const colorEnabled = getConfig<boolean>('icons.color.enabled') ?? true;
-	const color = colorEnabled ? new ThemeColor(itemTypes[type].color) : undefined;
-	return new ThemeIcon(itemTypes[type].icon, color);
+	const color = colorEnabled ? getIconColorFromItemType(type) : undefined;
+	const icon = getConfig<string>(`icons.${type}.icon`) ?? itemTypes[type].icon;
+
+	return new ThemeIcon(icon, color);
 }
 
-export function getIconColorFromItemType(type: ItemType) {
-	const itemTypes = getItemTypes();
-	return new ThemeColor(itemTypes[type].color);
+export function getIconColorFromItemType(type: ItemType): ThemeColor | undefined {
+	const color = getConfig<string>(`icons.${type}.color`) ?? itemTypes[type].color;
+	return new ThemeColor(color);
 }

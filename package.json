@@ -44,65 +44,80 @@
           "default": "true",
           "description": "Enable/disable color on icons in changelog."
         },
-        "simpleChangelog.icons.additions.color": {
+        "simpleChangelog.icons.addition.icon": {
+          "type": "string",
+          "default": "add",
+          "description": "The icon for the 'Additions' section."
+        },
+        "simpleChangelog.icons.addition.color": {
           "type": "string",
           "default": "charts.green",
           "description": "The color of the 'Additions' icon."
         },
-        "simpleChangelog.icons.additions": {
+        "simpleChangelog.icons.change.icon": {
           "type": "string",
-          "default": "add",
-          "description": "The icons for the 'Additions' section."
+          "default": "edit",
+          "description": "The icon for the 'Changes' section."
         },
-        "simpleChangelog.icons.changes.color": {
+        "simpleChangelog.icons.change.color": {
           "type": "string",
-          "default": "charts.green",
+          "default": "charts.blue",
           "description": "The color of the 'Changes' icon."
         },
-        "simpleChangelog.icons.changes": {
+        "simpleChangelog.icons.deprecation.icon": {
           "type": "string",
-          "default": "add",
-          "description": "The icons for the 'Changes' section."
+          "default": "discard",
+          "description": "The icon for the 'Deprecations' section."
         },
-        "simpleChangelog.icons.deprecations.color": {
+        "simpleChangelog.icons.deprecation.color": {
           "type": "string",
-          "default": "charts.green",
+          "default": "charts.purple",
           "description": "The color of the 'Deprecations' icon."
         },
-        "simpleChangelog.icons.deprecations": {
+        "simpleChangelog.icons.fix.icon": {
           "type": "string",
-          "default": "add",
-          "description": "The icons for the 'Deprecations' section."
+          "default": "debug",
+          "description": "The icon for the 'Fixes' section."
         },
-        "simpleChangelog.icons.fixes.color": {
+        "simpleChangelog.icons.fix.color": {
           "type": "string",
           "default": "charts.green",
           "description": "The color of the 'Fixes' icon."
         },
-        "simpleChangelog.icons.fixes": {
+        "simpleChangelog.icons.removal.icon": {
           "type": "string",
-          "default": "add",
-          "description": "The icons for the 'Fixes' section."
+          "default": "circle-slash",
+          "description": "The icon for the 'Removals' section."
         },
-        "simpleChangelog.icons.removals.color": {
+        "simpleChangelog.icons.removal.color": {
           "type": "string",
-          "default": "charts.green",
+          "default": "charts.red",
           "description": "The color of the 'Removals' icon."
         },
-        "simpleChangelog.icons.removals": {
+        "simpleChangelog.icons.securityChange.icon": {
           "type": "string",
-          "default": "add",
-          "description": "The icons for the 'Removals' section."
+          "default": "warning",
+          "description": "The icon for the 'Security Changes' section."
         },
-        "simpleChangelog.icons.securityChanges.color": {
+        "simpleChangelog.icons.securityChange.color": {
           "type": "string",
-          "default": "charts.green",
+          "default": "charts.orange",
           "description": "The color of the 'Security Changes' icon."
         },
-        "simpleChangelog.icons.securityChanges": {
+        "simpleChangelog.icons.item.icon": {
           "type": "string",
-          "default": "add",
-          "description": "The icons for the 'Security Changes' section."
+          "default": "circle-filled",
+          "description": "The icon for the changelog items."
+        },
+        "simpleChangelog.icons.item.enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable/disable type icons on items"
+        },
+        "simpleChangelog.groupsOpenByDefault": {
+          "type": "boolean",
+          "default": true,
+          "description": "If set to `true`, groups are open by default when opening version."
         }
       }
     },

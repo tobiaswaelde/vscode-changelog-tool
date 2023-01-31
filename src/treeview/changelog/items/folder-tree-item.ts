@@ -3,7 +3,7 @@ import { getLastDirName } from '../../../util/fs';
 import { Changelog } from '../../../classes/changelog';
 
 export class ChangelogFolderTreeItem extends vscode.TreeItem {
-	contextValue?: string | undefined = 'changelog-folder';
+	contextValue = 'changelog-folder';
 
 	constructor(public readonly changelog: Changelog) {
 		const dirname = getLastDirName(changelog.filepath);

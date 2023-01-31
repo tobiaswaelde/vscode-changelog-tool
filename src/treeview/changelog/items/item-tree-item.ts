@@ -1,11 +1,11 @@
 import { Changelog } from './../../../classes/changelog';
 import * as vscode from 'vscode';
 import { ItemType, ChangelogVersion, ChangelogItem } from '../../../types/changelog';
-import { getIconColorFromItemType } from '../../util';
+import { getIconColorFromItemType, getIconFromItemType } from '../../util';
 import { getConfig } from '../../../config';
 
 export class ChangelogItemTreeItem extends vscode.TreeItem {
-	contextValue?: string | undefined = 'changelog-item';
+	contextValue = 'changelog-item';
 
 	constructor(
 		public readonly changelog: Changelog,
@@ -19,6 +19,12 @@ export class ChangelogItemTreeItem extends vscode.TreeItem {
 
 		const colorEnabled = getConfig<boolean>('icons.color.enabled') ?? true;
 		const color = colorEnabled ? getIconColorFromItemType(type) : undefined;
-		this.iconPath = new vscode.ThemeIcon('circle-filled', color);
+
+		const typeIconsEnabled = getConfig<boolean>('icons.item.enabled') ?? false;
+		const rawIcon = getConfig<string>('icons.item.icon') ?? 'circle-filled';
+		const icon = typeIconsEnabled
+			? getIconFromItemType(type)
+			: new vscode.ThemeIcon(rawIcon, color);
+		this.iconPath = icon;
 	}
 }

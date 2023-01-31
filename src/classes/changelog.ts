@@ -1,4 +1,4 @@
-import { getItemTypes } from './../util/changelog';
+import { itemTypes } from './../util/changelog';
 import { ChangelogItem, ItemType, LineType, ChangelogVersion } from './../types/changelog';
 import * as fs from 'fs';
 import { findKey } from '../util/object';
@@ -88,13 +88,11 @@ export class Changelog {
 		}
 	}
 	private static parseItemType(line: string): ItemType | undefined {
-		const itemTypes = getItemTypes();
 		const type = line.replace(/\*\*/g, '').replace(/\#{3}/g, '').trim();
 		const key = findKey(itemTypes, 'header', type);
 		return key;
 	}
 	private static stringifyItemType(itemType: ItemType): string {
-		const itemTypes = getItemTypes();
 		return itemTypes[itemType].header;
 	}
 	private static stringifyVersion(version: ChangelogVersion): string {

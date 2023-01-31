@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { ItemType } from '../../../types/changelog';
-import { getItemTypes } from '../../../util/changelog';
+import { itemTypes } from '../../../util/changelog';
 import { findKey } from '../../../util/object';
 import { ChangelogVersionTreeItem } from '../items/version-tree-item';
 import { ChangelogTypeTreeItem } from './../items/type-tree-item';
@@ -8,7 +8,6 @@ import { ChangelogTypeTreeItem } from './../items/type-tree-item';
 export async function addItem(element: ChangelogTypeTreeItem | ChangelogVersionTreeItem) {
 	const { changelog, version } = element;
 	let type: ItemType = (element as ChangelogTypeTreeItem).type;
-	const itemTypes = getItemTypes();
 
 	// if element is version, ask user which type the item should be
 	if (element instanceof ChangelogVersionTreeItem) {
