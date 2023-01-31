@@ -22,7 +22,7 @@ type ChangelogTreeItem =
 
 type OnDidChangeEventData = ChangelogTreeItem | undefined | null | void;
 
-export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeItem> {
+export class ChangelogProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
 	private filepaths: string[] = [];
 
 	private _onDidChangeTreeData: vscode.EventEmitter<OnDidChangeEventData> =
@@ -35,22 +35,24 @@ export class ChangelogProvider implements vscode.TreeDataProvider<ChangelogTreeI
 		this.registerCommands(context);
 	}
 
-	getTreeItem(element: ChangelogTreeItem): vscode.TreeItem | Thenable<vscode.TreeItem> {
+	getTreeItem(element: vscode.TreeItem): vscode.TreeItem | Thenable<vscode.TreeItem> {
 		return element;
 	}
 
-	getChildren(element?: ChangelogTreeItem | undefined): vscode.ProviderResult<ChangelogTreeItem[]> {
+	getChildren(element?: vscode.TreeItem | undefined): vscode.ProviderResult<vscode.TreeItem[]> {
 		if (element === undefined) {
-			if (this.filepaths.length === 1) {
-				const changelog = new Changelog(this.filepaths[0]);
-				return changelog.versions.map((v) => new ChangelogVersionTreeItem(changelog, v));
-			}
-
 			return this.filepaths.map((filepath) => new ChangelogFolderTreeItem(new Changelog(filepath)));
 		}
 
 		if (element instanceof ChangelogFolderTreeItem) {
 			const { changelog } = element;
+
+			if (changelog.versions.length === 0) {
+				const item = new vscode.TreeItem('', vscode.TreeItemCollapsibleState.None);
+				item.description = 'No versions yet.';
+				return [item];
+			}
+
 			return changelog.versions.map((v) => new ChangelogVersionTreeItem(changelog, v));
 		}
 

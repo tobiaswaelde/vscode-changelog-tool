@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.4] - 2023-01-31
+### Fixed
+- displaying versions if only one changelog file exists
+
+
 ## [1.0.3] - 2023-01-31
 ### Fixed
 - fix changelog initialization from welcome view
