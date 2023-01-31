@@ -112,12 +112,22 @@
         "simpleChangelog.icons.item.enabled": {
           "type": "boolean",
           "default": false,
-          "description": "Enable/disable type icons on items"
+          "description": "Enable/disable type icons on items."
         },
         "simpleChangelog.groupsOpenByDefault": {
           "type": "boolean",
           "default": true,
           "description": "If set to `true`, groups are open by default when opening version."
+        },
+        "simpleChangelog.searchIncludeRegex": {
+          "type": "string",
+          "default": "/changelog.md/i",
+          "description": "The regex used to search workspace folders for changelog files."
+        },
+        "simpleChangelog.searchExcludeRegex": {
+          "type": "string",
+          "default": "/node_modules/",
+          "description": "The regex used exlude folders in search for changelog files."
         }
       }
     },

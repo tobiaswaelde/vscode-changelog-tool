@@ -13,6 +13,8 @@ import { addItem } from './commands/add-item';
 import { deleteItem } from './commands/delete-item';
 import { editVersion } from './commands/edit-version';
 import { deleteVersion } from './commands/delete-version';
+import { getConfig } from '../../config';
+import { regexpFromString } from '../../util/object';
 
 type ChangelogTreeItem =
 	| ChangelogFolderTreeItem
@@ -107,11 +109,13 @@ export class ChangelogProvider implements vscode.TreeDataProvider<vscode.TreeIte
 		}
 
 		// find all paths where a changelog.md is present
+		const includeRegex = regexpFromString(getConfig('searchIncludeRegex') ?? '/changelog.md/i');
+		const excludeRegex = regexpFromString(getConfig('searchExcludeRegex') ?? '/node_modules/');
 		const changelogPaths: string[] = workspaces.reduce(
-			(acc: string[], workspace) =>
-				acc.concat(...findFiles(workspace, /changelog.md/i, /node_modules/)),
+			(acc: string[], workspace) => acc.concat(...findFiles(workspace, includeRegex, excludeRegex)),
 			[]
 		);
+		console.log(changelogPaths);
 
 		// show welcome view is no changelogs found
 		if (changelogPaths.length === 0) {
