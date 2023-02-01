@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.3] - 2023-02-01
+### Changed
+- update readme with screenshot and project description
+
+
 ## [1.1.2] - 2023-02-01
 ### Added
 - attribution in changelog file (removable, see config)
