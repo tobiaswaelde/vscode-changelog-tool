@@ -128,6 +128,11 @@
           "type": "string",
           "default": "/node_modules/",
           "description": "The regex used exlude folders in search for changelog files."
+        },
+        "simpleChangelog.dateFormat": {
+          "type": "string",
+          "default": "YYYY-MM-DD",
+          "description": "The date format. See [Moment.js Documentation](https://momentjs.com/docs/#/displaying/format/) for more information."
         }
       }
     },
@@ -283,6 +288,7 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
+    "moment": "^2.29.4",
     "uuid": "^9.0.0"
   }
 }

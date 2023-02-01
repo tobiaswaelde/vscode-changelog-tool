@@ -109,13 +109,16 @@ export class ChangelogProvider implements vscode.TreeDataProvider<vscode.TreeIte
 		}
 
 		// find all paths where a changelog.md is present
-		const includeRegex = regexpFromString(getConfig('searchIncludeRegex') ?? '/changelog.md/i');
-		const excludeRegex = regexpFromString(getConfig('searchExcludeRegex') ?? '/node_modules/');
+		const includeRegex = regexpFromString(
+			getConfig<string>('searchIncludeRegex') ?? '/changelog.md/i'
+		);
+		const excludeRegex = regexpFromString(
+			getConfig<string>('searchExcludeRegex') ?? '/node_modules/'
+		);
 		const changelogPaths: string[] = workspaces.reduce(
 			(acc: string[], workspace) => acc.concat(...findFiles(workspace, includeRegex, excludeRegex)),
 			[]
 		);
-		console.log(changelogPaths);
 
 		// show welcome view is no changelogs found
 		if (changelogPaths.length === 0) {
