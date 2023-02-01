@@ -11,6 +11,7 @@
 ![Duplicated Lines (%)](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYYNH-cHlG8PXLMOvYAo&metric=duplicated_lines_density&token=7f170d74c3a50c043e1fe23a70a0fe864db95a72)
 ![Maintainability Rating](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYYNH-cHlG8PXLMOvYAo&metric=sqale_rating&token=7f170d74c3a50c043e1fe23a70a0fe864db95a72)
 
+![Overview](assets/images/overview.png)
 
 ## ToDo
 - [x] open changelog file
