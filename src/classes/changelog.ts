@@ -3,7 +3,6 @@ import { ChangelogItem, ItemType, LineType, ChangelogVersion } from './../types/
 import * as fs from 'fs';
 import { findKey } from '../util/object';
 import { getConfig } from '../config';
-import * as vscode from 'vscode';
 
 export class Changelog {
 	public versions: ChangelogVersion[] = [];

@@ -25,7 +25,6 @@ export async function addVersion(element: ChangelogFolderTreeItem) {
 		versionExists = changelog.versions.find((x) => x.label === res) !== undefined;
 		if (versionExists) {
 			vscode.window.showErrorMessage('Version already exists.');
-			continue;
 		}
 	} while (versionExists);
 

@@ -16,7 +16,7 @@ export const findFiles = (rootPath: string, filter?: RegExp, exclude?: RegExp): 
 	const matchingPaths: string[] = [];
 
 	const files = fs.readdirSync(rootPath);
-	for (let i = 0; i < files.length; i++) {
+	for (const filename of files) {
 		const filename = files[i];
 		const filepath = path.join(rootPath, filename);
 
