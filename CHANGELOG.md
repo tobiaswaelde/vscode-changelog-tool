@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5] - 2023-02-01
+### Added
+- config option to change type icons & colors
+- config option to enable/disable item grouping
+- config option to change displayed date format
+
+
 ## [1.0.4] - 2023-01-31
 ### Fixed
 - displaying versions if only one changelog file exists
@@ -17,7 +24,7 @@
 
 ## [1.0.1] - 2023-01-30
 ### Added
-- setting to enable/disable icon color
+- config option to enable/disable icon color
 
 ### Changed
 - rename `simplechangelog` to `simpleChangelog` everywhere in the project
