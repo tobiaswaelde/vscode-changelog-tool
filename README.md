@@ -2,6 +2,8 @@
 
 *Work in Progress*
 
+![Overview](assets/images/overview.png)
+
 ## ToDo
 - [x] open changelog file
 - [x] add version
