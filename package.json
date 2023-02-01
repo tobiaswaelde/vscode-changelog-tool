@@ -51,7 +51,7 @@
         },
         "simpleChangelog.icons.addition.color": {
           "type": "string",
-          "default": "charts.green",
+          "default": "charts.blue",
           "description": "The color of the 'Additions' icon."
         },
         "simpleChangelog.icons.change.icon": {
@@ -61,7 +61,7 @@
         },
         "simpleChangelog.icons.change.color": {
           "type": "string",
-          "default": "charts.blue",
+          "default": "charts.yellow",
           "description": "The color of the 'Changes' icon."
         },
         "simpleChangelog.icons.deprecation.icon": {
@@ -133,6 +133,11 @@
           "type": "string",
           "default": "YYYY-MM-DD",
           "description": "The date format. See [Moment.js Documentation](https://momentjs.com/docs/#/displaying/format/) for more information."
+        },
+        "simpleChangelog.itemGrouping": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/Disable item grouping under changelog version."
         }
       }
     },

@@ -60,22 +60,30 @@ export class ChangelogProvider implements vscode.TreeDataProvider<vscode.TreeIte
 
 		if (element instanceof ChangelogVersionTreeItem) {
 			const { changelog, version } = element;
+			const itemGroupingEnabled = getConfig<boolean>('itemGrouping') ?? true;
 
-			const additions = version.items.filter((x) => x.type === 'addition');
-			const changes = version.items.filter((x) => x.type === 'change');
-			const deprecations = version.items.filter((x) => x.type === 'deprecation');
-			const fixes = version.items.filter((x) => x.type === 'fix');
-			const removals = version.items.filter((x) => x.type === 'removal');
-			const securityChanges = version.items.filter((x) => x.type === 'securityChange');
+			if (itemGroupingEnabled) {
+				const additions = version.items.filter((x) => x.type === 'addition');
+				const changes = version.items.filter((x) => x.type === 'change');
+				const deprecations = version.items.filter((x) => x.type === 'deprecation');
+				const fixes = version.items.filter((x) => x.type === 'fix');
+				const removals = version.items.filter((x) => x.type === 'removal');
+				const securityChanges = version.items.filter((x) => x.type === 'securityChange');
 
-			return [
-				new ChangelogTypeTreeItem(changelog, version, 'addition', additions),
-				new ChangelogTypeTreeItem(changelog, version, 'change', changes),
-				new ChangelogTypeTreeItem(changelog, version, 'deprecation', deprecations),
-				new ChangelogTypeTreeItem(changelog, version, 'fix', fixes),
-				new ChangelogTypeTreeItem(changelog, version, 'removal', removals),
-				new ChangelogTypeTreeItem(changelog, version, 'securityChange', securityChanges),
-			];
+				return [
+					new ChangelogTypeTreeItem(changelog, version, 'addition', additions),
+					new ChangelogTypeTreeItem(changelog, version, 'change', changes),
+					new ChangelogTypeTreeItem(changelog, version, 'deprecation', deprecations),
+					new ChangelogTypeTreeItem(changelog, version, 'fix', fixes),
+					new ChangelogTypeTreeItem(changelog, version, 'removal', removals),
+					new ChangelogTypeTreeItem(changelog, version, 'securityChange', securityChanges),
+				];
+			} else {
+				version.items.sort((a, b) => a.type.localeCompare(b.type));
+				return version.items.map(
+					(item) => new ChangelogItemTreeItem(changelog, version, item.type, item)
+				);
+			}
 		}
 
 		if (element instanceof ChangelogTypeTreeItem) {
