@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.2] - 2023-02-01
+### Added
+- attribution in changelog file (removable, see config)
+
+
 ## [1.1.1] - 2023-02-01
 ### Fixed
 - singular and plural text for security changes
