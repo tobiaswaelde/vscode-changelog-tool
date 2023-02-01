@@ -47,62 +47,62 @@
         "simpleChangelog.icons.addition.icon": {
           "type": "string",
           "default": "add",
-          "description": "The icon for the 'Additions' section."
+          "markdownDescription": "The icon for the `Additions` section."
         },
         "simpleChangelog.icons.addition.color": {
           "type": "string",
           "default": "charts.blue",
-          "description": "The color of the 'Additions' icon."
+          "markdownDescription": "The color of the `Additions` icon."
         },
         "simpleChangelog.icons.change.icon": {
           "type": "string",
           "default": "edit",
-          "description": "The icon for the 'Changes' section."
+          "markdownDescription": "The icon for the `Changes` section."
         },
         "simpleChangelog.icons.change.color": {
           "type": "string",
           "default": "charts.yellow",
-          "description": "The color of the 'Changes' icon."
+          "markdownDescription": "The color of the `Changes` icon."
         },
         "simpleChangelog.icons.deprecation.icon": {
           "type": "string",
           "default": "discard",
-          "description": "The icon for the 'Deprecations' section."
+          "markdownDescription": "The icon for the `Deprecations` section."
         },
         "simpleChangelog.icons.deprecation.color": {
           "type": "string",
           "default": "charts.purple",
-          "description": "The color of the 'Deprecations' icon."
+          "markdownDescription": "The color of the `Deprecations` icon."
         },
         "simpleChangelog.icons.fix.icon": {
           "type": "string",
           "default": "debug",
-          "description": "The icon for the 'Fixes' section."
+          "markdownDescription": "The icon for the `Fixes` section."
         },
         "simpleChangelog.icons.fix.color": {
           "type": "string",
           "default": "charts.green",
-          "description": "The color of the 'Fixes' icon."
+          "markdownDescription": "The color of the `Fixes` icon."
         },
         "simpleChangelog.icons.removal.icon": {
           "type": "string",
           "default": "circle-slash",
-          "description": "The icon for the 'Removals' section."
+          "markdownDescription": "The icon for the `Removals` section."
         },
         "simpleChangelog.icons.removal.color": {
           "type": "string",
           "default": "charts.red",
-          "description": "The color of the 'Removals' icon."
+          "markdownDescription": "The color of the `Removals` icon."
         },
         "simpleChangelog.icons.securityChange.icon": {
           "type": "string",
           "default": "warning",
-          "description": "The icon for the 'Security Changes' section."
+          "markdownDescription": "The icon for the `Security Changes` section."
         },
         "simpleChangelog.icons.securityChange.color": {
           "type": "string",
           "default": "charts.orange",
-          "description": "The color of the 'Security Changes' icon."
+          "markdownDescription": "The color of the `Security Changes` icon."
         },
         "simpleChangelog.icons.item.icon": {
           "type": "string",
@@ -117,7 +117,7 @@
         "simpleChangelog.groupsOpenByDefault": {
           "type": "boolean",
           "default": true,
-          "description": "If set to `true`, groups are open by default when opening version."
+          "markdownDescription": "If set to `true`, groups are open by default when opening version."
         },
         "simpleChangelog.searchIncludeRegex": {
           "type": "string",
@@ -132,12 +132,31 @@
         "simpleChangelog.dateFormat": {
           "type": "string",
           "default": "YYYY-MM-DD",
-          "description": "The date format. See [Moment.js Documentation](https://momentjs.com/docs/#/displaying/format/) for more information."
+          "markdownDescription": "The date format. See [Moment.js Documentation](https://momentjs.com/docs/#/displaying/format/) for more information."
         },
         "simpleChangelog.itemGrouping": {
           "type": "boolean",
           "default": true,
           "description": "Enable/Disable item grouping under changelog version."
+        },
+        "simpleChangelog.attribution.type": {
+          "type": "string",
+          "default": "visible",
+          "enum": [
+            "visible",
+            "hidden",
+            "none"
+          ],
+          "description": "Choose how the attribution to the extension should be displayed."
+        },
+        "simpleChangelog.attribution.placement": {
+          "type": "string",
+          "default": "top",
+          "enum": [
+            "top",
+            "bottom"
+          ],
+          "description": "Choose where the attribution to the extension should be displayed."
         }
       }
     },
