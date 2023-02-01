@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.1] - 2023-02-01
+### Fixed
+- singular and plural text for security changes
+
+
 ## [1.1.0] - 2023-02-01
 ### Added
 - config option to change type icons & colors

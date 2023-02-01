@@ -53,8 +53,8 @@ export const itemTypes: ItemTypes = {
 		color: 'charts.red',
 	},
 	securityChange: {
-		singular: 'SecurityChange',
-		plural: 'SecurityChanges',
+		singular: 'Security Change',
+		plural: 'Security Changes',
 		header: 'Security',
 		icon: 'warning',
 		color: 'charts.orange',
