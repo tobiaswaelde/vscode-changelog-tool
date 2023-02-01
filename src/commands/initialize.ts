@@ -13,7 +13,7 @@ export async function initialize() {
 
 		// create file `CHANGELOG.md`
 		const filename = path.join(workspace, 'CHANGELOG.md');
-		console.log({ filename });
+
 		if (!fs.existsSync(filename)) {
 			// create file
 			fs.writeFileSync(filename, '', 'utf-8');

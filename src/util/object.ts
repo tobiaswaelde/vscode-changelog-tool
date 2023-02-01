@@ -13,7 +13,6 @@ export function regexpFromString(value: string): RegExp {
 
 	const flags = parts[parts.length - 1];
 	const pattern = parts.join('/').replace(`/${flags}`, '');
-	console.log(pattern, flags);
 
 	return new RegExp(pattern, flags);
 }

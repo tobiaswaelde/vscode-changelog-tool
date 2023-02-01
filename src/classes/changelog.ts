@@ -2,6 +2,8 @@ import { itemTypes } from './../util/changelog';
 import { ChangelogItem, ItemType, LineType, ChangelogVersion } from './../types/changelog';
 import * as fs from 'fs';
 import { findKey } from '../util/object';
+import { getConfig } from '../config';
+import * as vscode from 'vscode';
 
 export class Changelog {
 	public versions: ChangelogVersion[] = [];
@@ -59,9 +61,22 @@ export class Changelog {
 		return changelog;
 	}
 	public toString() {
+		const attributionPosition = getConfig<'top' | 'bottom'>('attribution.placement') ?? 'top';
+		const attribution = this.getAttribution();
+
 		let x = '# Changelog\n\n';
+
+		if (attributionPosition === 'top' && attribution) {
+			x += `${attribution}\n\n`;
+		}
+
 		x += this.versions.map((v) => Changelog.stringifyVersion(v)).join('\n\n\n');
-		return x;
+
+		if (attributionPosition === 'bottom' && attribution) {
+			x += `\n\n${attribution}`;
+		}
+
+		return x.trim();
 	}
 
 	private static parseLineType(line: string): LineType {
@@ -123,5 +138,18 @@ export class Changelog {
 		let res = `### ${Changelog.stringifyItemType(itemType)}\n`;
 		res += items.map((x) => `- ${x.text}`).join('\n');
 		return res.trim();
+	}
+	private getAttribution(): string | undefined {
+		const type = getConfig<'visible' | 'hidden' | 'none'>('attribution.visibility') ?? 'visible';
+		const text = `Changelog created using the [Simple Changelog](https://marketplace.visualstudio.com/items?itemName=tobiaswaelde.vscode-simple-changelog) extension for VS Code.`;
+
+		switch (type) {
+			case 'visible':
+				return `*${text}*`;
+			case 'hidden':
+				return `<!-- ${text} -->`;
+			case 'none':
+				return undefined;
+		}
 	}
 }

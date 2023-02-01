@@ -139,7 +139,7 @@
           "default": true,
           "description": "Enable/Disable item grouping under changelog version."
         },
-        "simpleChangelog.attribution.type": {
+        "simpleChangelog.attribution.visibility": {
           "type": "string",
           "default": "visible",
           "enum": [
