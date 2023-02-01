@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.5] - 2023-02-01
+## [1.1.0] - 2023-02-01
 ### Added
 - config option to change type icons & colors
 - config option to enable/disable item grouping
