@@ -15,7 +15,7 @@ This extension helps you creating consistent changelogs. With many customization
 
 ![Overview](assets/images/overview.png)
 
-The extension checks all folders in of your workspaces if a `CHANGELOG.md` (case-intensitive) file exists (include/exclude regexes are customizable). They are listet in the tree view by the name of folders where they are found. \
+The extension checks all folders in of your workspaces if a `CHANGELOG.md` (case-insensitive) file exists (include/exclude regexes are customizable). They are listet in the tree view by the name of folders where they are found. \
 When hovering over the tree items you get the options to add or edit items. Items can be deleted over the context menu.
 
 Whenever you add or change an item, the corresponding changelog file will be updated immediately. The file is formatted according to the convention from [keepachangelog.com](https://keepachangelog.com).\

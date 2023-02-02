@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.4] - 2023-02-02
+### Fixed
+- fixed minor typo in readme
+
+
 ## [1.1.3] - 2023-02-01
 ### Changed
 - update readme with screenshot and project description
