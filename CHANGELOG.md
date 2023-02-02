@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.5] - 2023-02-02
+### Fixed
+- fix version
+
+
 ## [1.1.4] - 2023-02-02
 ### Fixed
 - fixed minor typo in readme
