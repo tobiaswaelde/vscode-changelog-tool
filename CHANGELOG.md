@@ -2,6 +2,11 @@
 
 *Changelog created using the [Simple Changelog](https://marketplace.visualstudio.com/items?itemName=tobiaswaelde.vscode-simple-changelog) extension for VS Code.*
 
+## [1.2.1] - 2023-02-03
+### Removed
+- work in progress info from readme
+
+
 ## [1.2.0] - 2023-02-03
 ### Changed
 - add webpack to bundle extension files & reduce size

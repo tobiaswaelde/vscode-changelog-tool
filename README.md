@@ -1,7 +1,5 @@
 # Simple Changelog
 
-*Work in Progress*
-
 <!-- project badges -->
 ![Quality Gate Status](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYYNH-cHlG8PXLMOvYAo&metric=alert_status&token=7f170d74c3a50c043e1fe23a70a0fe864db95a72)
 ![Security Rating](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYYNH-cHlG8PXLMOvYAo&metric=security_rating&token=7f170d74c3a50c043e1fe23a70a0fe864db95a72)
