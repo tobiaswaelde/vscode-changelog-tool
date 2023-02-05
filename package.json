@@ -37,7 +37,7 @@
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
-      "title": "Simple Changelog configuration",
+      "title": "Simple Changelog",
       "properties": {
         "simpleChangelog.icons.color.enabled": {
           "type": "boolean",
