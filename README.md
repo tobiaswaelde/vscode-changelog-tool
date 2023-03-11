@@ -1,13 +1,13 @@
 # Simple Changelog
 
 <!-- project badges -->
-![Quality Gate Status](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYYNH-cHlG8PXLMOvYAo&metric=alert_status&token=7f170d74c3a50c043e1fe23a70a0fe864db95a72)
-![Security Rating](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYYNH-cHlG8PXLMOvYAo&metric=security_rating&token=7f170d74c3a50c043e1fe23a70a0fe864db95a72)
-![Vulnerabilities](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYYNH-cHlG8PXLMOvYAo&metric=vulnerabilities&token=7f170d74c3a50c043e1fe23a70a0fe864db95a72)
-![Bugs](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYYNH-cHlG8PXLMOvYAo&metric=bugs&token=7f170d74c3a50c043e1fe23a70a0fe864db95a72)
-![Lines of Code](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYYNH-cHlG8PXLMOvYAo&metric=ncloc&token=7f170d74c3a50c043e1fe23a70a0fe864db95a72)
-![Duplicated Lines (%)](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYYNH-cHlG8PXLMOvYAo&metric=duplicated_lines_density&token=7f170d74c3a50c043e1fe23a70a0fe864db95a72)
-![Maintainability Rating](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYYNH-cHlG8PXLMOvYAo&metric=sqale_rating&token=7f170d74c3a50c043e1fe23a70a0fe864db95a72)
+![Quality Gate Status](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYbOLx8mMsG9aSOZ5fok&metric=alert_status&token=sqb_adb2fbe59d0cb921284c7dc45c8da804261960c7)
+![Security Rating](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYbOLx8mMsG9aSOZ5fok&metric=security_rating&token=sqb_adb2fbe59d0cb921284c7dc45c8da804261960c7)
+![Vulnerabilities](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYbOLx8mMsG9aSOZ5fok&metric=vulnerabilities&token=sqb_adb2fbe59d0cb921284c7dc45c8da804261960c7)
+![Bugs](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYbOLx8mMsG9aSOZ5fok&metric=bugs&token=sqb_adb2fbe59d0cb921284c7dc45c8da804261960c7)
+![Lines of Code](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYbOLx8mMsG9aSOZ5fok&metric=ncloc&token=sqb_adb2fbe59d0cb921284c7dc45c8da804261960c7)
+![Duplicated Lines (%)](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYbOLx8mMsG9aSOZ5fok&metric=duplicated_lines_density&token=sqb_adb2fbe59d0cb921284c7dc45c8da804261960c7)
+![Maintainability Rating](https://sq.srv.tobiaswaelde.com/api/project_badges/measure?project=tobiaswaelde_vscode-simple-changelog_AYbOLx8mMsG9aSOZ5fok&metric=sqale_rating&token=sqb_adb2fbe59d0cb921284c7dc45c8da804261960c7)
 
 This extension helps you creating consistent changelogs. With many customization options you can look at the changelog however you want. Feel free to customize the icons and colors or try out flatten the tree structure or even change the date format.
 
